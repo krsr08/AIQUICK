@@ -1,0 +1,92 @@
+{
+  "test": "real Selenium dashboard journey",
+  "cases": [
+    {
+      "expected_verdict": "PASS",
+      "observed_verdict": "PASS",
+      "plan_id": "d24d0da98e734c299501c645c1ec223d",
+      "run": {
+        "id": "48e11d6e4dcb47fea49c41e227c5a334",
+        "plan_hash": "71cdd76f092e5964165903abaf63af1ac6afbdd54bd1856cafd3867092a64dbe",
+        "status": "PASS",
+        "steps": [
+          {
+            "instruction": "Open the demo CRM",
+            "status": "EXECUTED"
+          },
+          {
+            "instruction": "Enter ABC Technologies {run-id} in Customer Name",
+            "status": "EXECUTED"
+          },
+          {
+            "instruction": "Enter abc+{run-id}@example.com in Email",
+            "status": "EXECUTED"
+          },
+          {
+            "instruction": "Click Save",
+            "status": "EXECUTED"
+          }
+        ],
+        "assertions": [
+          {
+            "status": "PASS",
+            "expected": "ABC Technologies 48e11d6e4dcb47fea49c41e227c5a334",
+            "actual": "ABC Technologies 48e11d6e4dcb47fea49c41e227c5a334",
+            "comparator": "literal_equals",
+            "verification_level": "V2",
+            "source": "fresh-browser-record-by-id",
+            "record_id": "ce5f1158f332435193ef265298e6ec18"
+          }
+        ],
+        "record_id": "ce5f1158f332435193ef265298e6ec18",
+        "browser_version": "153.0.8010.53",
+        "evidence_mode": "synthetic-text-only",
+        "cleanup": "ephemeral-demo-records-discarded-at-service-stop"
+      }
+    },
+    {
+      "expected_verdict": "FAIL",
+      "observed_verdict": "FAIL",
+      "plan_id": "d79922beadbe49d598bbb6cb61f8adb9",
+      "run": {
+        "id": "e5e2772e8a2e4cd58a7cbcf62f360b67",
+        "plan_hash": "2d71fee5c85bbdf5fc6562f21ea0406f5091306c2adc44565fdf1384a73006f4",
+        "status": "FAIL",
+        "steps": [
+          {
+            "instruction": "Open the demo CRM",
+            "status": "EXECUTED"
+          },
+          {
+            "instruction": "Enter ABC Technologies {run-id} in Customer Name",
+            "status": "EXECUTED"
+          },
+          {
+            "instruction": "Enter abc+{run-id}@example.com in Email",
+            "status": "EXECUTED"
+          },
+          {
+            "instruction": "Click Save",
+            "status": "EXECUTED"
+          }
+        ],
+        "assertions": [
+          {
+            "status": "FAIL",
+            "expected": "deliberately incorrect",
+            "actual": "ABC Technologies e5e2772e8a2e4cd58a7cbcf62f360b67",
+            "comparator": "literal_equals",
+            "verification_level": "V2",
+            "source": "fresh-browser-record-by-id",
+            "record_id": "eba49829884a4887b957c93806dcf70b"
+          }
+        ],
+        "record_id": "eba49829884a4887b957c93806dcf70b",
+        "browser_version": "153.0.8010.53",
+        "evidence_mode": "synthetic-text-only",
+        "cleanup": "ephemeral-demo-records-discarded-at-service-stop"
+      }
+    }
+  ],
+  "browser_version": "153.0.8010.53"
+}

@@ -1,0 +1,11 @@
+# Repository administrator must enable required independent CODEOWNER approval.
+# This PR is a proposal; the agent must not merge it.
+* @krsr08
+/backend/src/autoqa/domain/ @krsr08
+/backend/src/autoqa/assertions/ @krsr08
+/backend/src/autoqa/selenium_engine/ @krsr08
+/backend/src/autoqa/orchestration/ @krsr08
+/policy_service/ @krsr08
+/deployment/ @krsr08
+/.github/ @krsr08
+/backend/tests/ @krsr08
