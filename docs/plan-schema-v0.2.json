@@ -1,0 +1,111 @@
+{
+  "$defs": {
+    "Step": {
+      "additionalProperties": false,
+      "properties": {
+        "instruction": {
+          "title": "Instruction",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "navigate",
+            "fill",
+            "click"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "target": {
+          "title": "Target",
+          "type": "string"
+        },
+        "value": {
+          "default": "",
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "instruction",
+        "kind",
+        "target"
+      ],
+      "title": "Step",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.2",
+      "default": "0.2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    },
+    "author": {
+      "title": "Author",
+      "type": "string"
+    },
+    "tenant_id": {
+      "default": "synthetic-demo",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}$",
+      "title": "Tenant Id",
+      "type": "string"
+    },
+    "steps": {
+      "items": {
+        "$ref": "#/$defs/Step"
+      },
+      "title": "Steps",
+      "type": "array"
+    },
+    "expected": {
+      "title": "Expected",
+      "type": "string"
+    },
+    "field": {
+      "enum": [
+        "Customer Name",
+        "Email"
+      ],
+      "title": "Field",
+      "type": "string"
+    },
+    "value": {
+      "title": "Value",
+      "type": "string"
+    },
+    "environment": {
+      "const": "synthetic-demo",
+      "default": "synthetic-demo",
+      "title": "Environment",
+      "type": "string"
+    },
+    "risk": {
+      "const": "R1",
+      "default": "R1",
+      "title": "Risk",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "author",
+    "steps",
+    "expected",
+    "field",
+    "value"
+  ],
+  "title": "Plan",
+  "type": "object"
+}

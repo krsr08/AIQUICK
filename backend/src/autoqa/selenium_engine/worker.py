@@ -8,6 +8,7 @@ from urllib.parse import urlsplit
 
 import httpx
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -36,6 +37,7 @@ class PDPClient:
 def browser():
     with tempfile.TemporaryDirectory(prefix='autoqa-profile-') as profile:
         options = webdriver.ChromeOptions()
+        options.binary_location = os.environ['AUTOQA_CHROME_BINARY']
         for arg in ('--headless=new', '--disable-extensions', '--disable-background-networking',
                     '--disable-sync', '--no-first-run', '--disable-quic',
                     '--proxy-server=http://127.0.0.1:8767', '--proxy-bypass-list=<-loopback>',
@@ -45,7 +47,7 @@ def browser():
         options.add_experimental_option('prefs', {'download_restrictions': 3,
             'profile.default_content_setting_values.notifications': 2,
             'credentials_enable_service': False, 'profile.password_manager_enabled': False})
-        driver = webdriver.Chrome(options=options)
+        driver = webdriver.Chrome(options=options, service=ChromeService(os.environ['AUTOQA_CHROMEDRIVER_BINARY']))
         try:
             driver.set_page_load_timeout(15)
             driver.set_script_timeout(3)
@@ -68,6 +70,7 @@ def execute(payload):
     assertions = []
     record = None
     browser_version = None
+    error_code = None
     index = 0
     try:
         with browser() as driver:
@@ -110,12 +113,14 @@ def execute(payload):
             client.call('/post', {'url': verifier.current_url, 'windows': len(verifier.window_handles)})
     except Denied:
         results[index]['status'] = 'BLOCKED'
-    except Exception:
+        error_code = 'PolicyOrTargetDenied'
+    except Exception as exc:
         # WebDriver exceptions may contain page content; never export raw exceptions.
         results[index]['status'] = 'ERROR'
+        error_code = type(exc).__name__
     return {'id': payload['id'], 'plan_hash': plan.digest(), 'status': verdict(results, assertions),
             'steps': results, 'assertions': assertions, 'record_id': record,
-            'browser_version': browser_version, 'evidence_mode': 'synthetic-text-only',
+            'browser_version': browser_version, 'error_code': error_code, 'evidence_mode': 'synthetic-text-only',
             'cleanup': 'ephemeral-demo-records-discarded-at-service-stop'}
 
 if __name__ == '__main__':

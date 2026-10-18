@@ -10,6 +10,9 @@ from autoqa.api.auth import hash_password, verify_password
 class Service:
     runs = {'run1': {'id': 'run1', 'status': 'passed'}}
 
+    def for_tenant(self, tenant_id):
+        return self
+
     def compile(self, body, author):
         return {'id': 'plan1', 'author': author, **body}
 

@@ -11,7 +11,7 @@ This is the planning baseline, not a certification report. A capability moves to
 | Full TC_CRM_001 with V2 persistence | Not certified | Fresh browser reopening created record by ID; four linked expectations |
 | Request-level network containment | Not certified | Redirect/popup/subresource plus direct-network bypass denial |
 | Edge | Not certified | Real Edge capability suite; Sprint 3 target |
-| PostgreSQL tenant isolation | Not certified | Real database RLS integration tests; not SQLite/mocks |
+| PostgreSQL tenant isolation | Demonstrated locally | Forced RLS, missing-context denial, forged tenant write denial, cross-tenant API denial, immutable plans and process persistence tested against PostgreSQL 18.2; see POSTGRES_VERIFICATION.md; no enterprise certification |
 | Enterprise SSO, vault, TLS, encrypted evidence | Not certified | Deployment/security verification |
 | Local model free-form English | Not implemented by this baseline | Model licence/digest, hardware and closed-set evaluation |
 | Salesforce, SAP Fiori, SAP GUI for HTML | Not certified | Authorized real sandbox/version/workflow evidence |

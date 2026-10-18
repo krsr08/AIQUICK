@@ -12,6 +12,7 @@ from fastapi.responses import FileResponse, JSONResponse
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from .auth import hash_password, verify_password
 from autoqa.natural_language.compiler import CompilationError
+from autoqa.persistence.repository import tenant_name
 
 ALLOWED_HOSTS = {'localhost:8000', '127.0.0.1:8000', 'testserver'}
 ALLOWED_ORIGINS = {'http://localhost:8000', 'http://127.0.0.1:8000', 'http://testserver'}
@@ -52,6 +53,7 @@ def create_app(service):
         if not isinstance(user, dict) or not isinstance(user.get('username'), str) or not user['username'] or not isinstance(user.get('roles'), list) or not user['roles'] or not set(user['roles']) <= known_roles or not isinstance(user.get('password_hash'), str) or not user['password_hash'].startswith('scrypt$') or user['username'] in accounts:
             raise ValueError('Invalid local account configuration')
         accounts[user['username']] = user
+        user['tenant_id'] = tenant_name(user.get('tenant_id', 'synthetic-demo'))
     dummy_hash = hash_password(secrets.token_urlsafe(24))
     app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
     sessions = {}
@@ -115,6 +117,10 @@ def create_app(service):
             raise HTTPException(403, 'Role required')
         return session['username']
 
+    def scoped_service(request):
+        actor(request)
+        return service.for_tenant(request.state.session['tenant_id'])
+
     @app.post('/api/v1/login')
     def login(body: Login, request: Request):
         now = time.monotonic()
@@ -132,7 +138,7 @@ def create_app(service):
         old = request.cookies.get('autoqa_session')
         sessions.pop(old, None)
         token = secrets.token_urlsafe(32)
-        session = {'username': account['username'], 'roles': account['roles'], 'csrf': secrets.token_urlsafe(32), 'expires': now + SESSION_TTL}
+        session = {'username': account['username'], 'roles': account['roles'], 'tenant_id': account['tenant_id'], 'csrf': secrets.token_urlsafe(32), 'expires': now + SESSION_TTL}
         sessions[token] = session
         response = JSONResponse({k: session[k] for k in ('username', 'roles', 'csrf')})
         response.set_cookie('autoqa_session', token, httponly=True, samesite='strict', max_age=SESSION_TTL, secure=request.url.scheme == 'https')
@@ -152,16 +158,16 @@ def create_app(service):
 
     @app.post('/api/v1/plans')
     def compile_plan(body: Plan, request: Request):
-        return service.compile(body.model_dump(), actor(request, 'Author'))
+        return scoped_service(request).compile(body.model_dump(), actor(request, 'Author'))
 
     @app.get('/api/v1/plans')
     def plans(request: Request):
         actor(request)
-        return service.list_plans()
+        return scoped_service(request).list_plans()
 
     @app.post('/api/v1/plans/{plan_id}/approve')
     def approve(plan_id: str, body: Approval, request: Request):
-        return service.approve(plan_id, actor(request, 'Approver'), body.plan_hash, body.confirm_expectation)
+        return scoped_service(request).approve(plan_id, actor(request, 'Approver'), body.plan_hash, body.confirm_expectation)
 
     @app.post('/api/v1/plans/{plan_id}/runs')
     def start(plan_id: str, body: Body, request: Request):
@@ -169,17 +175,17 @@ def create_app(service):
         key = request.headers.get('idempotency-key', '')
         if not key or len(key) > 200:
             raise HTTPException(422, 'Idempotency-Key required')
-        return service.start(plan_id, username, key)
+        return scoped_service(request).start(plan_id, username, key)
 
     @app.get('/api/v1/runs')
     def runs(request: Request):
         actor(request)
-        return list(service.runs.values())
+        return list(scoped_service(request).runs.values())
 
     @app.get('/api/v1/runs/{run_id}')
     def run(run_id: str, request: Request):
         actor(request)
-        return service.runs[run_id]
+        return scoped_service(request).runs[run_id]
 
     dist = Path(__file__).resolve().parents[4] / 'frontend' / 'dist'
 

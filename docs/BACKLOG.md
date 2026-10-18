@@ -20,6 +20,12 @@ Baseline 2026-10-17. Status below is planning, not test execution. Preserve safe
 
 ## Evidence record format
 
+### 2026-10-18 progress
+
+S1-03 is implemented as a review proposal: PostgreSQL/Alembic/forced RLS, immutable plans, persisted approvals/runs, durable idempotency and expiring worker leases. Windows development now has a private persistent cluster with DPAPI-protected database credentials. Real PostgreSQL tests include tenant denial, migration rollback/re-upgrade, plan persistence across process/server restarts and stale-worker fencing. See POSTGRES_VERIFICATION.md for final counts and CI status; no story or release is signed off by this entry.
+
+Next engineering priorities: enforce worker network/OS isolation; durable signed/anchored audit and encrypted evidence; expand full TC_CRM_001 with login, multiple linked expectations/search/cleanup/cancellation and Edge. Human review, legal dependency clearance, branch protection and commit signing remain prerequisites before merge/release.
+
 For every execution: date/time with zone, commit/tree identifier, OS/runtime/browser/driver versions, exact command, exit code, test counts including skips, positive and negative expected/actual verdicts, artifact locations, redaction results, observed blockers. CI configuration is not a successful CI run. Browser smoke is not enterprise certification. Automated fixtures exercising approval are not a human product/security signoff.
 
 ## Release targets remain unmeasured

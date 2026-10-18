@@ -35,4 +35,10 @@ Policy input must bind principal/role, tenant/environment, plan hash/version, ac
 
 ## Residual risks and release gate
 
+### PostgreSQL change, 2026-10-18
+
+Control-plane plans, approvals and runs now cross a PostgreSQL boundary. Migration and runtime identities are separate; the runtime refuses superuser/BYPASSRLS/owner memberships and missing forced-RLS flags. Tenant context comes from the server-owned account/session and is set only for each transaction. Immutable plans are SELECT/INSERT-only to the runtime, and reads verify the snapshot hash and tenant binding. Cross-tenant foreign keys and RLS WITH CHECK prevent accidental foreign-tenant writes. Idempotency is durable; advisory locks and a partial unique index serialize one active run per tenant. Expired leases become ERROR, and stale worker completion cannot replace that status.
+
+The browser worker receives no database connection URL. The Windows local launcher stores database credentials under user-bound DPAPI and retains its own private cluster; it never adopts an unrelated directory or installed service. RLS does not contain a compromised control-plane database login able to change its tenant setting. DPAPI protects credentials at rest, not database contents, and the same-user process boundary remains a residual risk. Database backup/restore, disk encryption, production identity and tenant lifecycle administration remain open gates. See POSTGRES_VERIFICATION.md for executed evidence.
+
 Synthetic local demos may use narrower controls; any absent TLS, OS isolation, external audit anchoring, encrypted storage, secret vault, RLS or network containment remains an open requirement rather than an implicit waiver. No production-derived data or enterprise credentials until these are verified. Human signoff: security owner PENDING; QA owner PENDING; date PENDING. Reassess with each changed trust boundary.

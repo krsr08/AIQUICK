@@ -1,0 +1,61 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.13, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\ANIRUDH\Documents\autoqa-enterprise\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\ANIRUDH\Documents\autoqa-enterprise\config
+configfile: pytest.ini
+plugins: anyio-4.15.1, platformdirs-4.13.3
+collecting ... collected 44 items
+
+config\test_api.py::test_password_hash PASSED                            [  2%]
+config\test_api.py::test_no_default_accounts PASSED                      [  4%]
+config\test_api.py::test_auth_cookie_and_expiry PASSED                   [  6%]
+config\test_api.py::test_cookie_flags_and_logout PASSED                  [  9%]
+config\test_api.py::test_host_origin_and_csrf PASSED                     [ 11%]
+config\test_api.py::test_roles_and_safe_errors PASSED                    [ 13%]
+config\test_api.py::test_runner_idempotency_required PASSED              [ 15%]
+config\test_api.py::test_login_rate_limit PASSED                         [ 18%]
+config\test_browser.py::test_real_create_and_fresh_session_verification[Email equals example@example.com-PASS] PASSED [ 20%]
+config\test_browser.py::test_real_create_and_fresh_session_verification[Email equals deliberately-wrong@example.com-FAIL] PASSED [ 22%]
+config\test_browser.py::test_proxy_denies_control_plane_and_external_host PASSED [ 25%]
+config\test_browser.py::test_policy_refuses_missing_token PASSED         [ 27%]
+config\test_core.py::test_literal_and_immutable_snapshot PASSED          [ 29%]
+config\test_core.py::test_unsupported_or_unverifiable_blocks[change0] PASSED [ 31%]
+config\test_core.py::test_unsupported_or_unverifiable_blocks[change1] PASSED [ 34%]
+config\test_core.py::test_unsupported_or_unverifiable_blocks[change2] PASSED [ 36%]
+config\test_core.py::test_unsupported_or_unverifiable_blocks[change3] PASSED [ 38%]
+config\test_core.py::test_verdict_never_passes_missing_or_blocked PASSED [ 40%]
+config\test_core.py::test_approval_tamper_separation_replay_and_expiry PASSED [ 43%]
+config\test_core.py::test_url_deny_by_default[https://127.0.0.1:8765/] PASSED [ 45%]
+config\test_core.py::test_url_deny_by_default[http://localhost:8765/] PASSED [ 47%]
+config\test_core.py::test_url_deny_by_default[http://127.0.0.1:8000/] PASSED [ 50%]
+config\test_core.py::test_url_deny_by_default[http://127.0.0.1:8765@evil.test/] PASSED [ 52%]
+config\test_core.py::test_url_deny_by_default[file:///etc/passwd] PASSED [ 54%]
+config\test_core.py::test_url_deny_by_default[http://127.0.0.1:8765/production] PASSED [ 56%]
+config\test_core.py::test_expired_final_post_check_is_denied PASSED      [ 59%]
+config\test_core.py::test_restoring_approval_does_not_renew_or_impersonate_human_approval PASSED [ 61%]
+config\test_core.py::test_worker_timeout_kills_descendants PASSED        [ 63%]
+config\test_dashboard.py::test_dashboard_describe_approve_run_and_mutated_expectation PASSED [ 65%]
+config\test_dev_database.py::test_persistent_plan_survives_server_restart_and_credentials_are_protected PASSED [ 68%]
+config\test_dev_database.py::test_unrelated_directory_is_not_adopted PASSED [ 70%]
+config\test_dev_database.py::test_directory_outside_owned_work_is_rejected PASSED [ 72%]
+config\test_migrations.py::test_migration_roundtrip_and_runtime_ddl_denial PASSED [ 75%]
+config\test_persistence.py::test_runtime_role_and_forced_rls PASSED      [ 77%]
+config\test_persistence.py::test_no_context_and_tenant_reads_with_check PASSED [ 79%]
+config\test_persistence.py::test_runtime_plan_immutable[update] PASSED   [ 81%]
+config\test_persistence.py::test_runtime_plan_immutable[delete] PASSED   [ 84%]
+config\test_persistence.py::test_pooled_transaction_tenant_does_not_leak PASSED [ 86%]
+config\test_persistence.py::test_plan_survives_new_repository_and_process PASSED [ 88%]
+config\test_persistence.py::test_expired_approval_blocks_start PASSED    [ 90%]
+config\test_persistence.py::test_admin_corruption_is_refused PASSED      [ 93%]
+config\test_persistence.py::test_expired_lease_is_error_and_late_finish_cannot_overwrite PASSED [ 95%]
+config\test_persistence.py::test_concurrent_idempotency_single_durable_run PASSED [ 97%]
+config\test_persistence.py::test_api_cross_tenant_objects_denied PASSED  [100%]
+
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\ANIRUDH\Documents\autoqa-enterprise\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: C:\Users\ANIRUDH\Documents\autoqa-enterprise\work\postgres-tests.xml -
+================== 44 passed, 1 warning in 194.49s (0:03:14) ==================

@@ -9,7 +9,9 @@ from pathlib import Path
 import pytest
 import uvicorn
 from selenium import webdriver
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -68,13 +70,20 @@ def test_dashboard_describe_approve_run_and_mutated_expectation(services, monkey
                     login('ui-author')
                     title = 'UI verification ' + expected_status
                     field = input_label('Test title')
-                    field.clear()
+                    field.send_keys(Keys.CONTROL, 'a', Keys.NULL, Keys.BACKSPACE)
                     field.send_keys(title)
+                    assert field.get_attribute('value') == title
                     field = input_label('Expected result')
-                    field.clear()
+                    field.send_keys(Keys.CONTROL, 'a', Keys.NULL, Keys.BACKSPACE)
                     field.send_keys(expected)
+                    assert field.get_attribute('value') == expected
                     button('Create plan for review').click()
-                    wait.until(EC.visibility_of_element_located((By.XPATH, '//h3[text()="' + title + '"]')))
+                    try:
+                        wait.until(EC.visibility_of_element_located((By.XPATH, '//h3[text()="' + title + '"]')))
+                    except TimeoutException:
+                        alerts = [e.text for e in driver.find_elements(By.CSS_SELECTOR, '[role="alert"]')]
+                        headings = [e.text for e in driver.find_elements(By.CSS_SELECTOR, 'h3')]
+                        raise AssertionError('Plan preview did not appear; UI feedback: ' + repr(alerts) + '; headings: ' + repr(headings)) from None
                     assert not driver.find_element(By.XPATH, '//button[text()="Run approved test"]').is_enabled()
                     assert not driver.find_element(By.XPATH, '//button[text()="Approve this plan"]').is_enabled()
                     button('Sign out').click()

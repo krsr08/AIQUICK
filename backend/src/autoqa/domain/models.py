@@ -13,10 +13,11 @@ class Step(BaseModel):
 
 class Plan(BaseModel):
     model_config = ConfigDict(frozen=True, extra='forbid')
-    schema_version: Literal['0.1'] = '0.1'
+    schema_version: Literal['0.2'] = '0.2'
     id: str
     title: str
     author: str
+    tenant_id: str = Field(default='synthetic-demo', pattern=r'^[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}$')
     steps: tuple[Step, ...]
     expected: str
     field: Literal['Customer Name', 'Email']

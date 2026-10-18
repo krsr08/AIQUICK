@@ -64,6 +64,19 @@ def test_expired_final_post_check_is_denied():
     with pytest.raises(PermissionError):
         policy.post('expired', {'url': 'http://127.0.0.1:8765/', 'windows': 1})
 
+def test_restoring_approval_does_not_renew_or_impersonate_human_approval():
+    import time
+    plan = compile_test(CASE, 'author')
+    expiry = time.time() + 30
+    policy = Policy()
+    approval = dict(plan=plan.model_dump(), hash=plan.digest(), approver='reviewer', expires_at=expiry)
+    policy.register(approval)
+    policy.register(dict(approval, restore=True))
+    assert policy.plans[plan.digest()][1] == expiry
+    assert [e['kind'] for e in policy.events] == ['APPROVED', 'APPROVAL_RESTORED']
+    with pytest.raises(PermissionError):
+        policy.register(dict(approval, expires_at=0, restore=True))
+
 def test_worker_timeout_kills_descendants(tmp_path):
     import os
     import subprocess

@@ -43,8 +43,12 @@ class Policy:
             or plan.steps[0].target != 'demo' or plan.steps[-1].target != 'Save'
             or {s.target for s in plan.steps[1:3]} != {'Customer Name', 'Email'}):
             raise PermissionError('Uncertified plan')
-        self.plans[plan.digest()] = (plan, time.time() + 900)
-        self.event('APPROVED', plan.digest(), actor=data['approver'])
+        expiry = data.get('expires_at', time.time() + 900)
+        if not isinstance(expiry, (int, float)) or not time.time() < expiry <= time.time() + 900:
+            raise PermissionError('Approval expiry is invalid')
+        self.plans[plan.digest()] = (plan, expiry)
+        self.event('APPROVAL_RESTORED' if data.get('restore') is True else 'APPROVED',
+                   plan.digest(), actor=data['approver'])
         return {'approved': True}
 
     def grant(self, data):
