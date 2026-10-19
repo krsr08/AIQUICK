@@ -23,6 +23,12 @@ jobs:
           "AUTOQA_POSTGRES_BIN=$($pgBinary.DirectoryName)" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
           & (Join-Path $pgBinary.DirectoryName 'postgres.exe') --version
       - run: New-Item -ItemType Directory -Force work
+      - name: Grant runner identity access to isolated test workspace
+        shell: pwsh
+        run: |
+          $runnerIdentity = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
+          & icacls.exe $env:GITHUB_WORKSPACE /grant "${runnerIdentity}:(OI)(CI)F"
+          if ($LASTEXITCODE -ne 0) { throw 'Cannot grant runner workspace access for restricted PostgreSQL process.' }
       - run: npm ci
         working-directory: frontend
       - run: npm run build

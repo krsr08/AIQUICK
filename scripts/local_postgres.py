@@ -16,7 +16,8 @@ DEFAULT_BIN = Path(r'C:\Program Files\PostgreSQL\18\bin')
 def _run(arguments, timeout=90):
     options = {'creationflags': subprocess.CREATE_NO_WINDOW} if os.name == 'nt' else {}
     try:
-        return subprocess.run([str(a) for a in arguments], check=True, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE,
+        diagnostics = subprocess.PIPE if Path(arguments[0]).stem == 'initdb' else subprocess.DEVNULL
+        return subprocess.run([str(a) for a in arguments], check=True, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=diagnostics,
                               text=True, timeout=timeout, **options)
     except (subprocess.SubprocessError, OSError) as error:
         # Report only fixed diagnostic categories, never paths, credentials or raw output.
