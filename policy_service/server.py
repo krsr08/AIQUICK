@@ -35,7 +35,10 @@ class Policy:
         self.events.append(event)
 
     def register(self, data):
-        plan = Plan.model_validate(data['plan'])
+        try:
+            plan = Plan.model_validate(data['plan'])
+        except ValueError:
+            raise PermissionError('Invalid approved snapshot') from None
         if plan.digest() != data['hash'] or data['approver'] == plan.author:
             raise PermissionError('Independent approval and exact plan hash required')
         # Validate the closed demo action sequence independently from the compiler.

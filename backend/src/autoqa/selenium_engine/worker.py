@@ -104,12 +104,14 @@ def execute(payload):
             client.call('/post', {'url': verifier.current_url, 'windows': len(verifier.window_handles)})
             client.call('/action', {'hash': plan.digest(), 'phase': 'verify', 'record': record,
                                    'url': verifier.current_url})
-            selector = '[data-testid="customer-name"]' if plan.field == 'Customer Name' else '[data-testid="customer-email"]'
-            observations = verifier.find_elements(By.CSS_SELECTOR, selector)
-            if len(observations) != 1 or not observations[0].is_displayed():
-                assertions.append({'status': 'INCONCLUSIVE', 'reason': 'Unique observation unavailable'})
-            else:
-                assertions.append(evaluate(plan.value.replace('{run-id}', payload['id']), observations[0].text, record))
+            for assertion in plan.required_assertions():
+                selector = '[data-testid="customer-name"]' if assertion.field == 'Customer Name' else '[data-testid="customer-email"]'
+                observations = verifier.find_elements(By.CSS_SELECTOR, selector)
+                if len(observations) != 1 or not observations[0].is_displayed():
+                    observed = {'status': 'INCONCLUSIVE', 'reason': 'Unique observation unavailable'}
+                else:
+                    observed = evaluate(assertion.value.replace('{run-id}', payload['id']), observations[0].text, record)
+                assertions.append(dict(observed, assertion_id=assertion.id, field=assertion.field, phase=assertion.phase))
             client.call('/post', {'url': verifier.current_url, 'windows': len(verifier.window_handles)})
     except Denied:
         results[index]['status'] = 'BLOCKED'
@@ -118,7 +120,7 @@ def execute(payload):
         # WebDriver exceptions may contain page content; never export raw exceptions.
         results[index]['status'] = 'ERROR'
         error_code = type(exc).__name__
-    return {'id': payload['id'], 'plan_hash': plan.digest(), 'status': verdict(results, assertions),
+    return {'id': payload['id'], 'plan_hash': plan.digest(), 'status': verdict(results, assertions, tuple(a.id for a in plan.required_assertions())),
             'steps': results, 'assertions': assertions, 'record_id': record,
             'browser_version': browser_version, 'error_code': error_code, 'evidence_mode': 'synthetic-text-only',
             'cleanup': 'ephemeral-demo-records-discarded-at-service-stop'}

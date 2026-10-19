@@ -47,7 +47,10 @@ class Repository:
         row = conn.execute(select(plans).where(plans.c.id == plan_id)).mappings().first()
         if row is None:
             raise KeyError(plan_id)
-        plan = Plan.model_validate(row['snapshot'])
+        try:
+            plan = Plan.model_validate(row['snapshot'])
+        except ValueError:
+            raise PermissionError('Stored plan integrity check failed') from None
         if plan.digest() != row['plan_hash'] or plan.id != row['id'] or plan.tenant_id != row['tenant_id']:
             raise PermissionError('Stored plan integrity check failed')
         return plan

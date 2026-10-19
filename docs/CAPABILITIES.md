@@ -4,7 +4,7 @@ This is the planning baseline, not a certification report. A capability moves to
 
 | Capability | Baseline state | Required evidence / scope |
 |---|---|---|
-| Chrome controlled synthetic workflow | Demonstrated locally | Chrome 153.0.8010.53 / ChromeDriver 153.0.8010.52; navigate, two fills, Save; fresh-session single-field V2 assertion; [evidence](VERIFICATION.md) |
+| Chrome controlled synthetic workflow | Demonstrated locally | Chrome 153.0.8010.53 / ChromeDriver 153.0.8010.52; navigate, two fills, Save; fresh-session single-field V2 assertion (historical baseline); linked-field continuation in LINKED_ASSERTIONS_VERIFICATION.md; [evidence](VERIFICATION.md) |
 | Guided English, review and hash-bound approval | Demonstrated locally | Real dashboard author/reviewer journey; hash mutation and self-approval negatives; [evidence](VERIFICATION.md) |
 | Policy deny-by-default and action-time checks | Partially verified | Separate PDP, ordered grants, replay/expiry and host negatives tested; compromised-worker containment and full outage/escape matrix not certified |
 | Deterministic PASS/FAIL | Demonstrated locally | Real correct-value PASS and intentionally wrong email/name FAIL; missing assertion rejection; [evidence](VERIFICATION.md) |

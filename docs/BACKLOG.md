@@ -31,3 +31,7 @@ For every execution: date/time with zone, commit/tree identifier, OS/runtime/bro
 ## Release targets remain unmeasured
 
 Blueprint targets: zero observed false PASS in at least 300 independent seeded defects and zero wrong-target writes in at least 300 ambiguous-target trials, plus reported abstention; approximately 1% upper 95% bound for zero events in 300 trials. A handful of successful local runs cannot establish those rates. Required assertions need evidence; missing evidence prohibits PASS. Never treat model self-evaluation as proof.
+
+### 2026-10-20 continuation
+
+Linked immutable name/email assertions and a multiline review editor extend section 17 verification; see LINKED_ASSERTIONS_VERIFICATION.md for executed results. Full status is tracked in REQUIREMENTS_STATUS.md. Under the user's delegated choice, the reference deployment uses self-hosted Linux, Keycloak OIDC and OpenBao; actual integration remains gated by a working container engine and verification, not by a further vendor-choice question. Independent human signoff and authorized enterprise QA access remain external gates.

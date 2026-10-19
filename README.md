@@ -20,7 +20,7 @@ On Windows, the launcher provisions a private persistent cluster under ignored `
 
 Open [the local workspace](http://127.0.0.1:8000). Sign in as author, review the prefilled synthetic example, and create a plan. Sign out and sign in as reviewer, select the plan, confirm its exact expectation, approve and run. A different expected value should produce FAIL. Unsupported sentences are rejected with guidance. Every new draft creates a separate immutable plan; approval does not transfer.
 
-This first slice supports exactly: open the synthetic CRM, fill Customer Name and Email once each, Save, then verify **one** literal field expectation by record ID in a separate Chrome session (V2). `{run-id}` is expanded for unique run data. It does not yet implement CRM login, search/count assertions, two simultaneous expectations, full TC_CRM_001, suites or arbitrary sites.
+This first slice supports exactly: open the synthetic CRM, fill Customer Name and Email once each, Save, then verify **one or two** linked literal field expectations by record ID in a separate Chrome session (V2). Enter one exact expectation per line; both must pass. `{run-id}` is expanded for unique run data. It does not yet implement CRM login, search/count assertions, full TC_CRM_001, suites or arbitrary sites.
 
 ## Verify
 
@@ -41,3 +41,5 @@ The API checks authentication, roles, Host/Origin and CSRF. The login/bootstrap 
 Plans, approvals and runs persist in PostgreSQL behind a restricted runtime account and forced row-level security. Tenant identity comes from server-provisioned accounts; request bodies/headers cannot change it. Restored approvals retain their original expiry. Run idempotency and per-tenant active-run limits are database-enforced; expired worker leases become ERROR and are never automatically replayed. Demo CRM records and policy audit events remain volatile. Screenshots/DOM evidence capture is disabled in the execution product until masking, scanning and encryption are implemented. Tests may capture the known-synthetic dashboard after login. No Ollama/model or hosted model is used. No production writes, uploads, downloads, destructive actions, Salesforce or SAP workflows are supported.
 
 Protected changes require independent human review before merge. CODEOWNERS is proposed; repository branch protection and signed-commit enforcement must be configured and verified by an administrator. See [readiness](docs/SPRINT0_READINESS.md), [threat model](docs/THREAT_MODEL.md), [dependency inventory](docs/dependencies.md), and [backlog](docs/BACKLOG.md).
+
+Current full-scope gaps: [completion ledger](docs/REQUIREMENTS_STATUS.md). Selected deployment defaults: [self-hosted Keycloak/OpenBao reference](docs/REFERENCE_DEPLOYMENT.md). Latest linked-assertion evidence: [verification](docs/LINKED_ASSERTIONS_VERIFICATION.md).

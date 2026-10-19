@@ -9,6 +9,7 @@ from pathlib import Path
 import pytest
 import uvicorn
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -17,6 +18,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 from autoqa.api import create_app
 from autoqa.api.auth import hash_password
+from autoqa.selenium_engine.configuration import browser_tools
 from test_browser import services  # Shared real demo/proxy/PDP lifecycle fixture.
 
 
@@ -45,7 +47,9 @@ def test_dashboard_describe_approve_run_and_mutated_expectation(services, monkey
                         '--no-first-run', '--window-size=1440,1100', '--remote-debugging-pipe',
                         '--user-data-dir=' + profile):
                 options.add_argument(arg)
-            driver = webdriver.Chrome(options=options)
+            tools = browser_tools()
+            options.binary_location = tools['AUTOQA_CHROME_BINARY']
+            driver = webdriver.Chrome(options=options, service=ChromeService(tools['AUTOQA_CHROMEDRIVER_BINARY']))
             try:
                 driver.set_page_load_timeout(20)
                 wait = WebDriverWait(driver, 25)
@@ -65,15 +69,17 @@ def test_dashboard_describe_approve_run_and_mutated_expectation(services, monkey
                     return driver.find_element(By.XPATH, '//label[starts-with(normalize-space(.),"' + label + '")]/input')
 
                 driver.get('http://127.0.0.1:8000/')
-                for expected_status, expected in [('PASS', 'Customer Name equals ABC Technologies {run-id}'),
-                                                  ('FAIL', 'Customer Name equals deliberately incorrect')]:
+                for expected_status, expected in [
+                    ('PASS', 'Customer Name equals ABC Technologies {run-id}\nEmail equals abc+{run-id}@example.com'),
+                    ('FAIL', 'Customer Name equals ABC Technologies {run-id}\nEmail equals deliberately-incorrect@example.com'),
+                ]:
                     login('ui-author')
                     title = 'UI verification ' + expected_status
                     field = input_label('Test title')
                     field.send_keys(Keys.CONTROL, 'a', Keys.NULL, Keys.BACKSPACE)
                     field.send_keys(title)
                     assert field.get_attribute('value') == title
-                    field = input_label('Expected result')
+                    field = driver.find_element(By.XPATH, '//label[starts-with(normalize-space(.),"Expected results")]/textarea')
                     field.send_keys(Keys.CONTROL, 'a', Keys.NULL, Keys.BACKSPACE)
                     field.send_keys(expected)
                     assert field.get_attribute('value') == expected
@@ -84,6 +90,7 @@ def test_dashboard_describe_approve_run_and_mutated_expectation(services, monkey
                         alerts = [e.text for e in driver.find_elements(By.CSS_SELECTOR, '[role="alert"]')]
                         headings = [e.text for e in driver.find_elements(By.CSS_SELECTOR, 'h3')]
                         raise AssertionError('Plan preview did not appear; UI feedback: ' + repr(alerts) + '; headings: ' + repr(headings)) from None
+                    assert [e.text for e in driver.find_elements(By.CSS_SELECTOR, '.expectation li')] == expected.splitlines()
                     assert not driver.find_element(By.XPATH, '//button[text()="Run approved test"]').is_enabled()
                     assert not driver.find_element(By.XPATH, '//button[text()="Approve this plan"]').is_enabled()
                     button('Sign out').click()
@@ -102,7 +109,8 @@ def test_dashboard_describe_approve_run_and_mutated_expectation(services, monkey
                                               'plan_id': matching_plan['id'], 'run': matching_run})
                     (output / 'dashboard-result.json').write_text(json.dumps(evidence, indent=2), encoding='utf-8')
                     assert observed == expected_status, 'Dashboard verdict ' + observed + ' did not match ' + expected_status
-                    assert matching_run['assertions'][0]['verification_level'] == 'V2'
+                    assert len(matching_run['assertions']) == 2
+                    assert all(a['verification_level'] == 'V2' for a in matching_run['assertions'])
                     # Capture only the authenticated synthetic result, never the login form or credentials.
                     driver.save_screenshot(str(output / ('dashboard-' + expected_status.lower() + '.png')))
                     if expected_status == 'PASS':
