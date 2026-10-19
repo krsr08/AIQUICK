@@ -12,6 +12,12 @@ ROOT = Path(__file__).resolve().parents[1]
 WORK = ROOT / 'work'
 DEFAULT_BIN = Path(r'C:\Program Files\PostgreSQL\18\bin')
 
+def grant_owner_access(directory):
+    """Give the current identity explicit access after PostgreSQL drops admin groups."""
+    if os.name == 'nt':
+        identity = subprocess.check_output(['whoami.exe'], text=True, timeout=10).strip()
+        _run(['icacls.exe', directory, '/grant', identity + ':(OI)(CI)F'], timeout=10)
+
 
 def _run(arguments, timeout=90):
     options = {'creationflags': subprocess.CREATE_NO_WINDOW} if os.name == 'nt' else {}
@@ -45,6 +51,7 @@ def local_postgres():
         raise RuntimeError('PostgreSQL initdb/pg_ctl binaries are required; set AUTOQA_POSTGRES_BIN')
     WORK.mkdir(parents=True, exist_ok=True)
     owned = Path(tempfile.mkdtemp(prefix='autoqa-pg-', dir=WORK)).resolve()
+    grant_owner_access(owned)
     data = owned / 'data'
     password_file = owned / 'init-password'
     password = secrets.token_urlsafe(32)

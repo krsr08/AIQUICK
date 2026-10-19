@@ -8,7 +8,7 @@ from pathlib import Path
 import secrets
 import socket
 
-from scripts.local_postgres import ROOT, DEFAULT_BIN, _run
+from scripts.local_postgres import ROOT, DEFAULT_BIN, _run, grant_owner_access
 
 def protect(data, *, decrypt=False):
     if os.name != 'nt':
@@ -63,6 +63,7 @@ def dev_database(directory=None):
             raise RuntimeError('Directory contains unrelated data; refusing to use it')
         else:
             marker.write_text(identity, encoding='utf-8')
+        grant_owner_access(directory)
         secret_file = directory / 'credentials.dpapi'
         if not secret_file.exists():
             if data.exists():
