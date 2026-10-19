@@ -16,11 +16,19 @@ DEFAULT_BIN = Path(r'C:\Program Files\PostgreSQL\18\bin')
 def _run(arguments, timeout=90):
     options = {'creationflags': subprocess.CREATE_NO_WINDOW} if os.name == 'nt' else {}
     try:
-        return subprocess.run([str(a) for a in arguments], check=True, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+        return subprocess.run([str(a) for a in arguments], check=True, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE,
                               text=True, timeout=timeout, **options)
     except (subprocess.SubprocessError, OSError) as error:
-        # Database output can contain configuration and credentials; do not echo it.
-        raise RuntimeError('Isolated PostgreSQL command failed: ' + Path(arguments[0]).name) from None
+        # Report only fixed diagnostic categories, never paths, credentials or raw output.
+        diagnostic = str(getattr(error, 'stderr', '') or '').lower()
+        category = next((label for needle, label in (
+            ('permission denied', 'permission denied'), ('access is denied', 'access denied'),
+            ('administrator', 'administrator account rejected'), ('locale', 'locale configuration'),
+            ('could not open', 'file could not be opened'), ('could not execute', 'child executable failed'),
+            ('invalid option', 'unsupported option'), ('unrecognized option', 'unsupported option'))
+            if needle in diagnostic), 'unclassified startup failure')
+        code = getattr(error, 'returncode', None)
+        raise RuntimeError(f'Isolated PostgreSQL command failed: {Path(arguments[0]).name}; {category}; exit={code}') from None
 
 
 @contextmanager
