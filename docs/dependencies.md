@@ -135,3 +135,7 @@ All 81 lock pins matched installed versions at inventory. Labels below come from
 | selenium-trunk.zip | 46030693 | `c15d5fbc7b288d2bb2fbc209e6b81ce9c82986b1c95b5ef54225e7e01e06cb86` | 6,121 entries; Apache-2.0 LICENSE and NOTICE; unversioned trunk source not reused |
 
 No Edge/Gecko browser test was run by this inventory. Actual Chrome execution and driver version belong in the implementation verification report. ZIP hashes establish the inspected bytes, not upstream authenticity or malware clearance.
+
+## Security refresh — 24 October 2026
+
+The historical inventory above is unchanged. Current pins update certifi to 2026.10.19 and filelock to 4.2.1 after seven audit findings blocked CI. A new 87-package audit reports zero known vulnerabilities; the full 70-test browser/database suite passed. See [verification and evidence](SECURITY_REFRESH_VERIFICATION.md).
