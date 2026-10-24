@@ -1,0 +1,10 @@
+{
+  "id": "b2ac554a7d5f463ba23c2af6d22991e1",
+  "steps": [],
+  "reason": "Execution stopped; saved data is not rolled back",
+  "status": "CANCELLED",
+  "plan_hash": "af11e1402a11b59a00c8f70091ce229c1aa8df130d864e1fa70e2e454b8b798d",
+  "assertions": [],
+  "cancelled_by": "cancel-author",
+  "cancel_requested": true
+}

@@ -1,0 +1,16 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.13, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\ANIRUDH\Documents\autoqa-enterprise\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\ANIRUDH\Documents\autoqa-enterprise\config
+configfile: pytest.ini
+plugins: anyio-4.15.1, platformdirs-4.13.3
+collecting ... collected 5 items
+
+config::test_real_create_and_fresh_session_verification[Email equals example@example.com-PASS] PASSED [ 20%]
+config::test_real_create_and_fresh_session_verification[Email equals deliberately-wrong@example.com-FAIL] PASSED [ 40%]
+config::test_proxy_denies_control_plane_and_external_host PASSED         [ 60%]
+config::test_policy_refuses_missing_token PASSED                         [ 80%]
+config::test_dashboard_describe_approve_run_and_mutated_expectation PASSED [100%]
+
+- generated xml file: C:\Users\ANIRUDH\Documents\autoqa-enterprise\work\postgres-browser-tests.xml -
+======================== 5 passed in 123.01s (0:02:03) ========================

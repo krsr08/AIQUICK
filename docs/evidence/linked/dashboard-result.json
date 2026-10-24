@@ -1,0 +1,124 @@
+{
+  "test": "real Selenium dashboard journey",
+  "cases": [
+    {
+      "expected_verdict": "PASS",
+      "observed_verdict": "PASS",
+      "plan_id": "5ba911edd1384086a2c2fa08e1e5c2e5",
+      "run": {
+        "id": "045e91fcf3244edd8ff8bab8ba4d076b",
+        "steps": [
+          {
+            "status": "EXECUTED",
+            "instruction": "Open the demo CRM"
+          },
+          {
+            "status": "EXECUTED",
+            "instruction": "Enter ABC Technologies {run-id} in Customer Name"
+          },
+          {
+            "status": "EXECUTED",
+            "instruction": "Enter abc+{run-id}@example.com in Email"
+          },
+          {
+            "status": "EXECUTED",
+            "instruction": "Click Save"
+          }
+        ],
+        "status": "PASS",
+        "cleanup": "ephemeral-demo-records-discarded-at-service-stop",
+        "plan_hash": "819459bf214c0711265cb30dc872a6aea2d7da1a11135e75944a03939f2ad133",
+        "record_id": "f4b2efd1a4bf415f9c349be7386a9a9c",
+        "assertions": [
+          {
+            "field": "Customer Name",
+            "phase": "final",
+            "actual": "ABC Technologies 045e91fcf3244edd8ff8bab8ba4d076b",
+            "source": "fresh-browser-record-by-id",
+            "status": "PASS",
+            "expected": "ABC Technologies 045e91fcf3244edd8ff8bab8ba4d076b",
+            "record_id": "f4b2efd1a4bf415f9c349be7386a9a9c",
+            "comparator": "literal_equals",
+            "assertion_id": "final-1",
+            "verification_level": "V2"
+          },
+          {
+            "field": "Email",
+            "phase": "final",
+            "actual": "abc+045e91fcf3244edd8ff8bab8ba4d076b@example.com",
+            "source": "fresh-browser-record-by-id",
+            "status": "PASS",
+            "expected": "abc+045e91fcf3244edd8ff8bab8ba4d076b@example.com",
+            "record_id": "f4b2efd1a4bf415f9c349be7386a9a9c",
+            "comparator": "literal_equals",
+            "assertion_id": "final-2",
+            "verification_level": "V2"
+          }
+        ],
+        "error_code": null,
+        "evidence_mode": "synthetic-text-only",
+        "browser_version": "153.0.8010.53"
+      }
+    },
+    {
+      "expected_verdict": "FAIL",
+      "observed_verdict": "FAIL",
+      "plan_id": "93b3f49181874749a249c7107f6324f7",
+      "run": {
+        "id": "76e660646fb9449eae9ba77785440e2f",
+        "steps": [
+          {
+            "status": "EXECUTED",
+            "instruction": "Open the demo CRM"
+          },
+          {
+            "status": "EXECUTED",
+            "instruction": "Enter ABC Technologies {run-id} in Customer Name"
+          },
+          {
+            "status": "EXECUTED",
+            "instruction": "Enter abc+{run-id}@example.com in Email"
+          },
+          {
+            "status": "EXECUTED",
+            "instruction": "Click Save"
+          }
+        ],
+        "status": "FAIL",
+        "cleanup": "ephemeral-demo-records-discarded-at-service-stop",
+        "plan_hash": "d7558b5be3a71ad4bc1e5c2942ef9d73a965b3ce2cdcaa9fb9d1dd4327ee907f",
+        "record_id": "7e267c15b21545e5901fa0ad1459ddd9",
+        "assertions": [
+          {
+            "field": "Customer Name",
+            "phase": "final",
+            "actual": "ABC Technologies 76e660646fb9449eae9ba77785440e2f",
+            "source": "fresh-browser-record-by-id",
+            "status": "PASS",
+            "expected": "ABC Technologies 76e660646fb9449eae9ba77785440e2f",
+            "record_id": "7e267c15b21545e5901fa0ad1459ddd9",
+            "comparator": "literal_equals",
+            "assertion_id": "final-1",
+            "verification_level": "V2"
+          },
+          {
+            "field": "Email",
+            "phase": "final",
+            "actual": "abc+76e660646fb9449eae9ba77785440e2f@example.com",
+            "source": "fresh-browser-record-by-id",
+            "status": "FAIL",
+            "expected": "deliberately-incorrect@example.com",
+            "record_id": "7e267c15b21545e5901fa0ad1459ddd9",
+            "comparator": "literal_equals",
+            "assertion_id": "final-2",
+            "verification_level": "V2"
+          }
+        ],
+        "error_code": null,
+        "evidence_mode": "synthetic-text-only",
+        "browser_version": "153.0.8010.53"
+      }
+    }
+  ],
+  "browser_version": "153.0.8010.53"
+}

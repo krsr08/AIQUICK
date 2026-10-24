@@ -1,0 +1,863 @@
+{
+  "python": "3.12.13 (main, Jun  2 2026, 22:47:20) [MSC v.1944 64 bit (AMD64)]",
+  "assets": [
+    {
+      "name": "chrome.exe",
+      "size": 4205720,
+      "sha256": "69c8c7e2d950845df00c1e9f7c024e143c9efdc43401c6fb5009cad89bbf4ef9"
+    },
+    {
+      "name": "edgedriver_win32.zip",
+      "size": 9812426,
+      "sha256": "9ab38537c14f691b3d728e112fa9d76044d3fd81ea24401367eca1cff31aa2a3",
+      "entry_count": 5,
+      "binaries": [
+        "msedgedriver.exe"
+      ],
+      "license_paths": [
+        "Driver_Notes/EULA",
+        "Driver_Notes/LICENSE"
+      ],
+      "license_excerpts": {
+        "Driver_Notes/EULA": "MICROSOFT SOFTWARE LICENSE TERMS\r\nMICROSOFT EDGE WEBDRIVER\r\n\r\nThese license terms are an agreement between you and Microsoft Corporation (or one of its affiliates). They apply to the software named above and any Microsoft services or software updates (except to the extent such services or updates are accompanied by new or additional terms, in which case those different terms apply prospectively and do not alter your or Microsoft\u2019s rights relating to pre-updated software or services). IF YOU CO",
+        "Driver_Notes/LICENSE": "// Copyright 2015 The Chromium Authors\n// Copyright (C) Microsoft Corporation. All rights reserved.\n//\n// Redistribution and use in source and binary forms, with or without\n// modification, are permitted provided that the following conditions are\n// met:\n//\n//    * Redistributions of source code must retain the above copyright\n// notice, this list of conditions and the following disclaimer.\n//    * Redistributions in binary form must reproduce the above\n// copyright notice, this list of conditio"
+      }
+    },
+    {
+      "name": "edgedriver_win64.zip",
+      "size": 11715108,
+      "sha256": "00dd7fbc6fc4bd68e6e86badbe76e6570513414085f476e73d3787ba3410d562",
+      "entry_count": 5,
+      "binaries": [
+        "msedgedriver.exe"
+      ],
+      "license_paths": [
+        "Driver_Notes/EULA",
+        "Driver_Notes/LICENSE"
+      ],
+      "license_excerpts": {
+        "Driver_Notes/EULA": "MICROSOFT SOFTWARE LICENSE TERMS\r\nMICROSOFT EDGE WEBDRIVER\r\n\r\nThese license terms are an agreement between you and Microsoft Corporation (or one of its affiliates). They apply to the software named above and any Microsoft services or software updates (except to the extent such services or updates are accompanied by new or additional terms, in which case those different terms apply prospectively and do not alter your or Microsoft\u2019s rights relating to pre-updated software or services). IF YOU CO",
+        "Driver_Notes/LICENSE": "// Copyright 2015 The Chromium Authors\n// Copyright (C) Microsoft Corporation. All rights reserved.\n//\n// Redistribution and use in source and binary forms, with or without\n// modification, are permitted provided that the following conditions are\n// met:\n//\n//    * Redistributions of source code must retain the above copyright\n// notice, this list of conditions and the following disclaimer.\n//    * Redistributions in binary form must reproduce the above\n// copyright notice, this list of conditio"
+      }
+    },
+    {
+      "name": "geckodriver-v0.37.1-win32.zip",
+      "size": 1698255,
+      "sha256": "7b4bfd914e24a843db2dc38ba515086d28828601aaf443e9d2664918e343fb99",
+      "entry_count": 1,
+      "binaries": [
+        "geckodriver.exe"
+      ],
+      "license_paths": [],
+      "license_excerpts": {}
+    },
+    {
+      "name": "geckodriver-v0.37.1-win64.zip",
+      "size": 1780114,
+      "sha256": "dfed9315abe8d2fbc1b6161a2ee8002452e79cf05ee92fdc653a4e26bc35edd8",
+      "entry_count": 1,
+      "binaries": [
+        "geckodriver.exe"
+      ],
+      "license_paths": [],
+      "license_excerpts": {}
+    },
+    {
+      "name": "selenium-trunk.zip",
+      "size": 46030693,
+      "sha256": "c15d5fbc7b288d2bb2fbc209e6b81ce9c82986b1c95b5ef54225e7e01e06cb86",
+      "entry_count": 6121,
+      "binaries": [
+        "selenium-trunk/cpp/prebuilt/Win32/Release/IEDriverServer.exe",
+        "selenium-trunk/cpp/prebuilt/x64/Release/IEDriverServer.exe"
+      ],
+      "license_paths": [
+        "selenium-trunk/LICENSE",
+        "selenium-trunk/NOTICE",
+        "selenium-trunk/py/LICENSE",
+        "selenium-trunk/py/NOTICE",
+        "selenium-trunk/rust/LICENSE",
+        "selenium-trunk/rust/NOTICE",
+        "selenium-trunk/scripts/license_header.txt",
+        "selenium-trunk/third_party/closure/LICENSE",
+        "selenium-trunk/third_party/js/qunit/LICENSE"
+      ],
+      "license_excerpts": {
+        "selenium-trunk/LICENSE": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that i",
+        "selenium-trunk/NOTICE": "Copyright 2011-2026 Software Freedom Conservancy\nCopyright 2004-2011 Selenium committers\n"
+      }
+    }
+  ],
+  "packages": [
+    {
+      "name": "annotated-doc",
+      "pin": "0.0.5",
+      "installed": "0.0.5",
+      "licence": "MIT",
+      "license_files": [
+        "annotated_doc-0.0.5.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "annotated-types",
+      "pin": "0.8.0",
+      "installed": "0.8.0",
+      "licence": "MIT",
+      "license_files": [
+        "annotated_types-0.8.0.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "anyio",
+      "pin": "4.15.1",
+      "installed": "4.15.1",
+      "licence": "MIT",
+      "license_files": [
+        "anyio-4.15.1.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "arrow",
+      "pin": "1.4.0",
+      "installed": "1.4.0",
+      "licence": "License :: OSI Approved :: Apache Software License",
+      "license_files": [
+        "arrow-1.4.0.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "attrs",
+      "pin": "26.1.0",
+      "installed": "26.1.0",
+      "licence": "MIT",
+      "license_files": [
+        "attrs-26.1.0.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "bandit",
+      "pin": "1.9.4",
+      "installed": "1.9.4",
+      "licence": "Apache-2.0",
+      "license_files": [
+        "bandit-1.9.4.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "boolean-py",
+      "pin": "5.0",
+      "installed": "5.0",
+      "licence": "BSD-2-Clause",
+      "license_files": [
+        "boolean_py-5.0.dist-info/licenses/CHANGELOG.rst",
+        "boolean_py-5.0.dist-info/licenses/LICENSE.txt",
+        "boolean_py-5.0.dist-info/licenses/README.rst"
+      ]
+    },
+    {
+      "name": "cachecontrol",
+      "pin": "0.14.4",
+      "installed": "0.14.4",
+      "licence": "Apache-2.0",
+      "license_files": [
+        "cachecontrol-0.14.4.dist-info/licenses/LICENSE.txt"
+      ]
+    },
+    {
+      "name": "certifi",
+      "pin": "2026.7.22",
+      "installed": "2026.7.22",
+      "licence": "MPL-2.0",
+      "license_files": [
+        "certifi-2026.7.22.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "cffi",
+      "pin": "2.1.1",
+      "installed": "2.1.1",
+      "licence": "MIT-0",
+      "license_files": [
+        "cffi-2.1.1.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "chardet",
+      "pin": "7.6.0",
+      "installed": "7.6.0",
+      "licence": "0BSD",
+      "license_files": [
+        "chardet-7.6.0.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "charset-normalizer",
+      "pin": "3.5.2",
+      "installed": "3.5.2",
+      "licence": "MIT",
+      "license_files": [
+        "charset_normalizer-3.5.2.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "click",
+      "pin": "8.5.0",
+      "installed": "8.5.0",
+      "licence": "BSD-3-Clause",
+      "license_files": [
+        "click-8.5.0.dist-info/licenses/LICENSE.txt"
+      ]
+    },
+    {
+      "name": "colorama",
+      "pin": "0.4.6",
+      "installed": "0.4.6",
+      "licence": "License :: OSI Approved :: BSD License",
+      "license_files": [
+        "colorama-0.4.6.dist-info/licenses/LICENSE.txt"
+      ]
+    },
+    {
+      "name": "cyclonedx-bom",
+      "pin": "7.5.0",
+      "installed": "7.5.0",
+      "licence": "Apache-2.0",
+      "license_files": [
+        "cyclonedx_bom-7.5.0.dist-info/licenses/LICENSE",
+        "cyclonedx_bom-7.5.0.dist-info/licenses/NOTICE",
+        "cyclonedx_py/_internal/utils/license_trove_classifier.py"
+      ]
+    },
+    {
+      "name": "cyclonedx-python-lib",
+      "pin": "11.12.0",
+      "installed": "11.12.0",
+      "licence": "Apache-2.0",
+      "license_files": [
+        "cyclonedx/contrib/license/__init__.py",
+        "cyclonedx/contrib/license/exceptions.py",
+        "cyclonedx/contrib/license/factories.py",
+        "cyclonedx/factory/license.py",
+        "cyclonedx/model/license.py",
+        "cyclonedx_python_lib-11.12.0.dist-info/licenses/LICENSE",
+        "cyclonedx_python_lib-11.12.0.dist-info/licenses/NOTICE"
+      ]
+    },
+    {
+      "name": "defusedxml",
+      "pin": "0.7.1",
+      "installed": "0.7.1",
+      "licence": "PSFL",
+      "license_files": [
+        "defusedxml-0.7.1.dist-info/LICENSE"
+      ]
+    },
+    {
+      "name": "fastapi",
+      "pin": "0.143.3",
+      "installed": "0.143.3",
+      "licence": "MIT",
+      "license_files": [
+        "fastapi-0.143.3.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "filelock",
+      "pin": "4.2.0",
+      "installed": "4.2.0",
+      "licence": "MIT",
+      "license_files": [
+        "filelock-4.2.0.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "fqdn",
+      "pin": "1.6.0",
+      "installed": "1.6.0",
+      "licence": "MPL-2.0",
+      "license_files": [
+        "fqdn-1.6.0.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "h11",
+      "pin": "0.16.0",
+      "installed": "0.16.0",
+      "licence": "MIT",
+      "license_files": [
+        "h11-0.16.0.dist-info/licenses/LICENSE.txt"
+      ]
+    },
+    {
+      "name": "httpcore",
+      "pin": "1.0.9",
+      "installed": "1.0.9",
+      "licence": "BSD-3-Clause",
+      "license_files": [
+        "httpcore-1.0.9.dist-info/licenses/LICENSE.md"
+      ]
+    },
+    {
+      "name": "httpx",
+      "pin": "0.28.1",
+      "installed": "0.28.1",
+      "licence": "BSD-3-Clause",
+      "license_files": [
+        "httpx-0.28.1.dist-info/licenses/LICENSE.md"
+      ]
+    },
+    {
+      "name": "idna",
+      "pin": "3.20",
+      "installed": "3.20",
+      "licence": "BSD-3-Clause",
+      "license_files": [
+        "idna-3.20.dist-info/licenses/LICENSE.md"
+      ]
+    },
+    {
+      "name": "iniconfig",
+      "pin": "2.3.1",
+      "installed": "2.3.1",
+      "licence": "MIT",
+      "license_files": [
+        "iniconfig-2.3.1.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "isoduration",
+      "pin": "20.11.0",
+      "installed": "20.11.0",
+      "licence": "UNKNOWN",
+      "license_files": [
+        "isoduration-20.11.0.dist-info/LICENSE"
+      ]
+    },
+    {
+      "name": "jsonpointer",
+      "pin": "3.2.1",
+      "installed": "3.2.1",
+      "licence": "Modified BSD License",
+      "license_files": [
+        "jsonpointer-3.2.1.dist-info/licenses/AUTHORS",
+        "jsonpointer-3.2.1.dist-info/licenses/LICENSE.txt"
+      ]
+    },
+    {
+      "name": "jsonschema",
+      "pin": "4.26.0",
+      "installed": "4.26.0",
+      "licence": "MIT",
+      "license_files": [
+        "jsonschema-4.26.0.dist-info/licenses/COPYING"
+      ]
+    },
+    {
+      "name": "jsonschema-specifications",
+      "pin": "2025.9.1",
+      "installed": "2025.9.1",
+      "licence": "MIT",
+      "license_files": [
+        "jsonschema_specifications-2025.9.1.dist-info/licenses/COPYING"
+      ]
+    },
+    {
+      "name": "lark",
+      "pin": "1.3.1",
+      "installed": "1.3.1",
+      "licence": "MIT",
+      "license_files": [
+        "lark-1.3.1.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "license-expression",
+      "pin": "30.4.4",
+      "installed": "30.4.4",
+      "licence": "Apache-2.0",
+      "license_files": [
+        "license_expression-30.4.4.dist-info/INSTALLER",
+        "license_expression-30.4.4.dist-info/METADATA",
+        "license_expression-30.4.4.dist-info/RECORD",
+        "license_expression-30.4.4.dist-info/REQUESTED",
+        "license_expression-30.4.4.dist-info/WHEEL",
+        "license_expression-30.4.4.dist-info/licenses/AUTHORS.rst",
+        "license_expression-30.4.4.dist-info/licenses/CHANGELOG.rst",
+        "license_expression-30.4.4.dist-info/licenses/CODE_OF_CONDUCT.rst"
+      ]
+    },
+    {
+      "name": "lxml",
+      "pin": "6.1.3",
+      "installed": "6.1.3",
+      "licence": "BSD-3-Clause",
+      "license_files": [
+        "lxml-6.1.3.dist-info/licenses/LICENSE.txt",
+        "lxml-6.1.3.dist-info/licenses/LICENSES.txt"
+      ]
+    },
+    {
+      "name": "markdown-it-py",
+      "pin": "4.2.0",
+      "installed": "4.2.0",
+      "licence": "License :: OSI Approved :: MIT License",
+      "license_files": [
+        "markdown_it_py-4.2.0.dist-info/licenses/LICENSE",
+        "markdown_it_py-4.2.0.dist-info/licenses/LICENSE.markdown-it"
+      ]
+    },
+    {
+      "name": "mdurl",
+      "pin": "0.1.2",
+      "installed": "0.1.2",
+      "licence": "License :: OSI Approved :: MIT License",
+      "license_files": [
+        "mdurl-0.1.2.dist-info/LICENSE"
+      ]
+    },
+    {
+      "name": "msgpack",
+      "pin": "1.2.3",
+      "installed": "1.2.3",
+      "licence": "Apache-2.0",
+      "license_files": [
+        "msgpack-1.2.3.dist-info/licenses/COPYING"
+      ]
+    },
+    {
+      "name": "opentelemetry-api",
+      "pin": "1.45.1",
+      "installed": "1.45.1",
+      "licence": "Apache-2.0",
+      "license_files": [
+        "opentelemetry_api-1.45.1.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "outcome",
+      "pin": "1.3.0.post0",
+      "installed": "1.3.0.post0",
+      "licence": "MIT OR Apache-2.0",
+      "license_files": [
+        "outcome-1.3.0.post0.dist-info/LICENSE",
+        "outcome-1.3.0.post0.dist-info/LICENSE.APACHE2",
+        "outcome-1.3.0.post0.dist-info/LICENSE.MIT"
+      ]
+    },
+    {
+      "name": "packageurl-python",
+      "pin": "0.17.6",
+      "installed": "0.17.6",
+      "licence": "MIT",
+      "license_files": []
+    },
+    {
+      "name": "packaging",
+      "pin": "26.3",
+      "installed": "26.3",
+      "licence": "Apache-2.0 OR BSD-2-Clause",
+      "license_files": [
+        "packaging-26.3.dist-info/licenses/LICENSE",
+        "packaging-26.3.dist-info/licenses/LICENSE.APACHE",
+        "packaging-26.3.dist-info/licenses/LICENSE.BSD",
+        "packaging/licenses/__init__.py",
+        "packaging/licenses/_spdx.py"
+      ]
+    },
+    {
+      "name": "pip",
+      "pin": "26.2.1",
+      "installed": "26.2.1",
+      "licence": "MIT",
+      "license_files": [
+        "pip-26.2.1.dist-info/licenses/AUTHORS.txt",
+        "pip-26.2.1.dist-info/licenses/LICENSE.txt",
+        "pip-26.2.1.dist-info/licenses/src/pip/_vendor/cachecontrol/LICENSE.txt",
+        "pip-26.2.1.dist-info/licenses/src/pip/_vendor/certifi/LICENSE",
+        "pip-26.2.1.dist-info/licenses/src/pip/_vendor/distlib/LICENSE.txt",
+        "pip-26.2.1.dist-info/licenses/src/pip/_vendor/distro/LICENSE",
+        "pip-26.2.1.dist-info/licenses/src/pip/_vendor/idna/LICENSE.md",
+        "pip-26.2.1.dist-info/licenses/src/pip/_vendor/msgpack/COPYING"
+      ]
+    },
+    {
+      "name": "pip-api",
+      "pin": "0.0.35",
+      "installed": "0.0.35",
+      "licence": "Apache License\n                        Version 2.0, January 2004\n                     https://www.apache.org/licenses/\n\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n1. Definitions.\n\n   \"License\" shall mean the terms and conditions for use, reproduction,\n   and distribution as defined by Sections 1 through 9 of this document.\n\n   \"Licensor\" shall mean the copyright owner or entity ",
+      "license_files": [
+        "pip_api-0.0.35.dist-info/licenses/LICENSE",
+        "pip_api/_vendor/packaging/licenses/__init__.py",
+        "pip_api/_vendor/packaging/licenses/_spdx.py"
+      ]
+    },
+    {
+      "name": "pip-audit",
+      "pin": "2.10.1",
+      "installed": "2.10.1",
+      "licence": "License :: OSI Approved :: Apache Software License",
+      "license_files": [
+        "pip_audit-2.10.1.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "pip-requirements-parser",
+      "pin": "32.0.1",
+      "installed": "32.0.1",
+      "licence": "MIT",
+      "license_files": [
+        "pip_requirements_parser-32.0.1.dist-info/mit.LICENSE"
+      ]
+    },
+    {
+      "name": "platformdirs",
+      "pin": "4.13.3",
+      "installed": "4.13.3",
+      "licence": "MIT",
+      "license_files": [
+        "platformdirs-4.13.3.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "pluggy",
+      "pin": "1.7.0",
+      "installed": "1.7.0",
+      "licence": "MIT",
+      "license_files": [
+        "pluggy-1.7.0.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "py-serializable",
+      "pin": "2.1.0",
+      "installed": "2.1.0",
+      "licence": "Apache-2.0",
+      "license_files": [
+        "py_serializable-2.1.0.dist-info/LICENSE"
+      ]
+    },
+    {
+      "name": "pycparser",
+      "pin": "3.11",
+      "installed": "3.11",
+      "licence": "BSD-3-Clause",
+      "license_files": [
+        "pycparser-3.11.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "pydantic",
+      "pin": "2.14.1",
+      "installed": "2.14.1",
+      "licence": "MIT",
+      "license_files": [
+        "pydantic-2.14.1.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "pydantic-core",
+      "pin": "2.50.1",
+      "installed": "2.50.1",
+      "licence": "MIT",
+      "license_files": [
+        "pydantic_core-2.50.1.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "pygments",
+      "pin": "2.21.0",
+      "installed": "2.21.0",
+      "licence": "BSD-2-Clause",
+      "license_files": [
+        "pygments-2.21.0.dist-info/licenses/AUTHORS",
+        "pygments-2.21.0.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "pyparsing",
+      "pin": "3.3.3",
+      "installed": "3.3.3",
+      "licence": "MIT",
+      "license_files": [
+        "pyparsing-3.3.3.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "pysocks",
+      "pin": "1.7.1",
+      "installed": "1.7.1",
+      "licence": "BSD",
+      "license_files": [
+        "PySocks-1.7.1.dist-info/LICENSE"
+      ]
+    },
+    {
+      "name": "pytest",
+      "pin": "9.1.1",
+      "installed": "9.1.1",
+      "licence": "MIT",
+      "license_files": [
+        "pytest-9.1.1.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "python-dateutil",
+      "pin": "2.9.0.post0",
+      "installed": "2.9.0.post0",
+      "licence": "Dual License",
+      "license_files": [
+        "python_dateutil-2.9.0.post0.dist-info/LICENSE"
+      ]
+    },
+    {
+      "name": "pyyaml",
+      "pin": "6.0.3",
+      "installed": "6.0.3",
+      "licence": "MIT",
+      "license_files": [
+        "pyyaml-6.0.3.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "referencing",
+      "pin": "0.37.0",
+      "installed": "0.37.0",
+      "licence": "MIT",
+      "license_files": [
+        "referencing-0.37.0.dist-info/licenses/COPYING"
+      ]
+    },
+    {
+      "name": "requests",
+      "pin": "2.34.2",
+      "installed": "2.34.2",
+      "licence": "Apache-2.0",
+      "license_files": [
+        "requests-2.34.2.dist-info/licenses/LICENSE",
+        "requests-2.34.2.dist-info/licenses/NOTICE"
+      ]
+    },
+    {
+      "name": "rfc3339-validator",
+      "pin": "0.1.4",
+      "installed": "0.1.4",
+      "licence": "MIT license",
+      "license_files": [
+        "rfc3339_validator-0.1.4.dist-info/LICENSE"
+      ]
+    },
+    {
+      "name": "rfc3986-validator",
+      "pin": "0.1.1",
+      "installed": "0.1.1",
+      "licence": "MIT license",
+      "license_files": [
+        "rfc3986_validator-0.1.1.dist-info/LICENSE"
+      ]
+    },
+    {
+      "name": "rfc3987-syntax",
+      "pin": "1.1.0",
+      "installed": "1.1.0",
+      "licence": "MIT",
+      "license_files": [
+        "rfc3987_syntax-1.1.0.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "rich",
+      "pin": "15.0.0",
+      "installed": "15.0.0",
+      "licence": "MIT",
+      "license_files": [
+        "rich-15.0.0.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "rpds-py",
+      "pin": "2026.9.1",
+      "installed": "2026.9.1",
+      "licence": "MIT",
+      "license_files": [
+        "rpds_py-2026.9.1.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "selenium",
+      "pin": "4.51.0",
+      "installed": "4.51.0",
+      "licence": "Apache-2.0",
+      "license_files": [
+        "selenium-4.51.0.dist-info/LICENSE"
+      ]
+    },
+    {
+      "name": "six",
+      "pin": "1.17.0",
+      "installed": "1.17.0",
+      "licence": "MIT",
+      "license_files": [
+        "six-1.17.0.dist-info/LICENSE"
+      ]
+    },
+    {
+      "name": "sniffio",
+      "pin": "1.3.1",
+      "installed": "1.3.1",
+      "licence": "MIT OR Apache-2.0",
+      "license_files": [
+        "sniffio-1.3.1.dist-info/LICENSE",
+        "sniffio-1.3.1.dist-info/LICENSE.APACHE2",
+        "sniffio-1.3.1.dist-info/LICENSE.MIT"
+      ]
+    },
+    {
+      "name": "sortedcontainers",
+      "pin": "2.4.0",
+      "installed": "2.4.0",
+      "licence": "Apache 2.0",
+      "license_files": [
+        "sortedcontainers-2.4.0.dist-info/LICENSE"
+      ]
+    },
+    {
+      "name": "starlette",
+      "pin": "1.8.0",
+      "installed": "1.8.0",
+      "licence": "BSD-3-Clause",
+      "license_files": [
+        "starlette-1.8.0.dist-info/licenses/LICENSE.md"
+      ]
+    },
+    {
+      "name": "stevedore",
+      "pin": "5.9.1",
+      "installed": "5.9.1",
+      "licence": "Apache-2.0",
+      "license_files": [
+        "stevedore-5.9.1.dist-info/licenses/AUTHORS",
+        "stevedore-5.9.1.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "tomli",
+      "pin": "2.5.0",
+      "installed": "2.5.0",
+      "licence": "MIT",
+      "license_files": [
+        "tomli-2.5.0.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "tomli-w",
+      "pin": "1.2.0",
+      "installed": "1.2.0",
+      "licence": "License :: OSI Approved :: MIT License",
+      "license_files": [
+        "tomli_w-1.2.0.dist-info/LICENSE"
+      ]
+    },
+    {
+      "name": "trio",
+      "pin": "0.34.0",
+      "installed": "0.34.0",
+      "licence": "MIT OR Apache-2.0",
+      "license_files": [
+        "trio-0.34.0.dist-info/licenses/LICENSE",
+        "trio-0.34.0.dist-info/licenses/LICENSE.APACHE2",
+        "trio-0.34.0.dist-info/licenses/LICENSE.MIT"
+      ]
+    },
+    {
+      "name": "trio-websocket",
+      "pin": "0.12.2",
+      "installed": "0.12.2",
+      "licence": "License :: OSI Approved :: MIT License",
+      "license_files": [
+        "trio_websocket-0.12.2.dist-info/LICENSE"
+      ]
+    },
+    {
+      "name": "typing-extensions",
+      "pin": "4.16.0",
+      "installed": "4.16.0",
+      "licence": "PSF-2.0",
+      "license_files": [
+        "typing_extensions-4.16.0.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "typing-inspection",
+      "pin": "0.4.4",
+      "installed": "0.4.4",
+      "licence": "MIT",
+      "license_files": [
+        "typing_inspection-0.4.4.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "tzdata",
+      "pin": "2026.5",
+      "installed": "2026.5",
+      "licence": "Apache-2.0",
+      "license_files": [
+        "tzdata-2026.5.dist-info/licenses/LICENSE",
+        "tzdata-2026.5.dist-info/licenses/licenses/LICENSE_APACHE"
+      ]
+    },
+    {
+      "name": "uri-template",
+      "pin": "1.3.0",
+      "installed": "1.3.0",
+      "licence": "MIT License",
+      "license_files": [
+        "uri_template-1.3.0.dist-info/LICENSE"
+      ]
+    },
+    {
+      "name": "urllib3",
+      "pin": "2.8.0",
+      "installed": "2.8.0",
+      "licence": "MIT",
+      "license_files": [
+        "urllib3-2.8.0.dist-info/licenses/LICENSE.txt"
+      ]
+    },
+    {
+      "name": "uvicorn",
+      "pin": "0.54.0",
+      "installed": "0.54.0",
+      "licence": "BSD-3-Clause",
+      "license_files": [
+        "uvicorn-0.54.0.dist-info/licenses/LICENSE.md"
+      ]
+    },
+    {
+      "name": "webcolors",
+      "pin": "25.10.0",
+      "installed": "25.10.0",
+      "licence": "BSD-3-Clause",
+      "license_files": [
+        "webcolors-25.10.0.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "websocket-client",
+      "pin": "1.9.2",
+      "installed": "1.9.2",
+      "licence": "Apache-2.0",
+      "license_files": [
+        "websocket_client-1.9.2.dist-info/licenses/LICENSE"
+      ]
+    },
+    {
+      "name": "wsproto",
+      "pin": "1.3.2",
+      "installed": "1.3.2",
+      "licence": "MIT",
+      "license_files": [
+        "wsproto-1.3.2.dist-info/licenses/LICENSE"
+      ]
+    }
+  ]
+}

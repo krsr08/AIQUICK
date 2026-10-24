@@ -1,0 +1,775 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.13, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\ANIRUDH\Documents\autoqa-enterprise\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\ANIRUDH\Documents\autoqa-enterprise\config
+configfile: pytest.ini
+plugins: anyio-4.15.1, platformdirs-4.13.3
+collecting ... collected 54 items
+
+config\test_api.py::test_password_hash ERROR                             [  1%]
+config\test_api.py::test_no_default_accounts ERROR                       [  3%]
+config\test_api.py::test_auth_cookie_and_expiry ERROR                    [  5%]
+config\test_api.py::test_cookie_flags_and_logout ERROR                   [  7%]
+config\test_api.py::test_host_origin_and_csrf ERROR                      [  9%]
+config\test_api.py::test_roles_and_safe_errors ERROR                     [ 11%]
+config\test_api.py::test_runner_idempotency_required ERROR               [ 12%]
+config\test_api.py::test_login_rate_limit ERROR                          [ 14%]
+config\test_browser.py::test_real_create_and_fresh_session_verification[Email equals example@example.com-PASS] ERROR [ 16%]
+config\test_browser.py::test_real_create_and_fresh_session_verification[Email equals deliberately-wrong@example.com-FAIL] ERROR [ 18%]
+config\test_browser.py::test_proxy_denies_control_plane_and_external_host ERROR [ 20%]
+config\test_browser.py::test_policy_refuses_missing_token ERROR          [ 22%]
+config\test_core.py::test_literal_and_immutable_snapshot ERROR           [ 24%]
+config\test_core.py::test_unsupported_or_unverifiable_blocks[change0] ERROR [ 25%]
+config\test_core.py::test_unsupported_or_unverifiable_blocks[change1] ERROR [ 27%]
+config\test_core.py::test_unsupported_or_unverifiable_blocks[change2] ERROR [ 29%]
+config\test_core.py::test_unsupported_or_unverifiable_blocks[change3] ERROR [ 31%]
+config\test_core.py::test_verdict_never_passes_missing_or_blocked ERROR  [ 33%]
+config\test_core.py::test_approval_tamper_separation_replay_and_expiry ERROR [ 35%]
+config\test_core.py::test_url_deny_by_default[https://127.0.0.1:8765/] ERROR [ 37%]
+config\test_core.py::test_url_deny_by_default[http://localhost:8765/] ERROR [ 38%]
+config\test_core.py::test_url_deny_by_default[http://127.0.0.1:8000/] ERROR [ 40%]
+config\test_core.py::test_url_deny_by_default[http://127.0.0.1:8765@evil.test/] ERROR [ 42%]
+config\test_core.py::test_url_deny_by_default[file:///etc/passwd] ERROR  [ 44%]
+config\test_core.py::test_url_deny_by_default[http://127.0.0.1:8765/production] ERROR [ 46%]
+config\test_core.py::test_expired_final_post_check_is_denied ERROR       [ 48%]
+config\test_core.py::test_restoring_approval_does_not_renew_or_impersonate_human_approval ERROR [ 50%]
+config\test_core.py::test_worker_timeout_kills_descendants ERROR         [ 51%]
+config\test_dashboard.py::test_dashboard_describe_approve_run_and_mutated_expectation ERROR [ 53%]
+config\test_dev_database.py::test_persistent_plan_survives_server_restart_and_credentials_are_protected ERROR [ 55%]
+config\test_dev_database.py::test_unrelated_directory_is_not_adopted ERROR [ 57%]
+config\test_dev_database.py::test_directory_outside_owned_work_is_rejected ERROR [ 59%]
+config\test_linked_assertions.py::test_linked_expectations_are_literal_immutable_and_hash_bound ERROR [ 61%]
+config\test_linked_assertions.py::test_invalid_linked_expectations_are_rejected[Customer Name equals Example {run-id}\nEmail equals example@example.com\nEmail equals x] ERROR [ 62%]
+config\test_linked_assertions.py::test_invalid_linked_expectations_are_rejected[Customer Name equals Example {run-id}\nEmail equals example@example.com\n] ERROR [ 64%]
+config\test_linked_assertions.py::test_invalid_linked_expectations_are_rejected[\nCustomer Name equals Example {run-id}\nEmail equals example@example.com] ERROR [ 66%]
+config\test_linked_assertions.py::test_invalid_linked_expectations_are_rejected[Email equals x\nEmail equals y] ERROR [ 68%]
+config\test_linked_assertions.py::test_invalid_linked_expectations_are_rejected[Email equals ] ERROR [ 70%]
+config\test_linked_assertions.py::test_invalid_linked_expectations_are_rejected[Email equals {secret}] ERROR [ 72%]
+config\test_linked_assertions.py::test_invalid_linked_expectations_are_rejected[Email equals x\r] ERROR [ 74%]
+config\test_linked_assertions.py::test_missing_or_duplicate_link_never_passes ERROR [ 75%]
+config\test_linked_assertions.py::test_legacy_snapshot_survives_database_reload_with_original_hash ERROR [ 77%]
+config\test_migrations.py::test_migration_roundtrip_and_runtime_ddl_denial ERROR [ 79%]
+config\test_persistence.py::test_runtime_role_and_forced_rls ERROR       [ 81%]
+config\test_persistence.py::test_no_context_and_tenant_reads_with_check ERROR [ 83%]
+config\test_persistence.py::test_runtime_plan_immutable[update] ERROR    [ 85%]
+config\test_persistence.py::test_runtime_plan_immutable[delete] ERROR    [ 87%]
+config\test_persistence.py::test_pooled_transaction_tenant_does_not_leak ERROR [ 88%]
+config\test_persistence.py::test_plan_survives_new_repository_and_process ERROR [ 90%]
+config\test_persistence.py::test_expired_approval_blocks_start ERROR     [ 92%]
+config\test_persistence.py::test_admin_corruption_is_refused ERROR       [ 94%]
+config\test_persistence.py::test_expired_lease_is_error_and_late_finish_cannot_overwrite ERROR [ 96%]
+config\test_persistence.py::test_concurrent_idempotency_single_durable_run ERROR [ 98%]
+config\test_persistence.py::test_api_cross_tenant_objects_denied ERROR   [100%]
+
+=================================== ERRORS ====================================
+____________________ ERROR at setup of test_password_hash _____________________
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_________________ ERROR at setup of test_no_default_accounts __________________
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+________________ ERROR at setup of test_auth_cookie_and_expiry ________________
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_______________ ERROR at setup of test_cookie_flags_and_logout ________________
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_________________ ERROR at setup of test_host_origin_and_csrf _________________
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+________________ ERROR at setup of test_roles_and_safe_errors _________________
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_____________ ERROR at setup of test_runner_idempotency_required ______________
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+___________________ ERROR at setup of test_login_rate_limit ___________________
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_ ERROR at setup of test_real_create_and_fresh_session_verification[Email equals example@example.com-PASS] _
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_ ERROR at setup of test_real_create_and_fresh_session_verification[Email equals deliberately-wrong@example.com-FAIL] _
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_____ ERROR at setup of test_proxy_denies_control_plane_and_external_host _____
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_____________ ERROR at setup of test_policy_refuses_missing_token _____________
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+____________ ERROR at setup of test_literal_and_immutable_snapshot ____________
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_____ ERROR at setup of test_unsupported_or_unverifiable_blocks[change0] ______
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_____ ERROR at setup of test_unsupported_or_unverifiable_blocks[change1] ______
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_____ ERROR at setup of test_unsupported_or_unverifiable_blocks[change2] ______
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_____ ERROR at setup of test_unsupported_or_unverifiable_blocks[change3] ______
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_______ ERROR at setup of test_verdict_never_passes_missing_or_blocked ________
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_____ ERROR at setup of test_approval_tamper_separation_replay_and_expiry _____
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_____ ERROR at setup of test_url_deny_by_default[https://127.0.0.1:8765/] _____
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_____ ERROR at setup of test_url_deny_by_default[http://localhost:8765/] ______
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_____ ERROR at setup of test_url_deny_by_default[http://127.0.0.1:8000/] ______
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_ ERROR at setup of test_url_deny_by_default[http://127.0.0.1:8765@evil.test/] _
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_______ ERROR at setup of test_url_deny_by_default[file:///etc/passwd] ________
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_ ERROR at setup of test_url_deny_by_default[http://127.0.0.1:8765/production] _
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+__________ ERROR at setup of test_expired_final_post_check_is_denied __________
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_ ERROR at setup of test_restoring_approval_does_not_renew_or_impersonate_human_approval _
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+___________ ERROR at setup of test_worker_timeout_kills_descendants ___________
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_ ERROR at setup of test_dashboard_describe_approve_run_and_mutated_expectation _
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_ ERROR at setup of test_persistent_plan_survives_server_restart_and_credentials_are_protected _
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+__________ ERROR at setup of test_unrelated_directory_is_not_adopted __________
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_______ ERROR at setup of test_directory_outside_owned_work_is_rejected _______
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_ ERROR at setup of test_linked_expectations_are_literal_immutable_and_hash_bound _
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_ ERROR at setup of test_invalid_linked_expectations_are_rejected[Customer Name equals Example {run-id}\nEmail equals example@example.com\nEmail equals x] _
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_ ERROR at setup of test_invalid_linked_expectations_are_rejected[Customer Name equals Example {run-id}\nEmail equals example@example.com\n] _
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_ ERROR at setup of test_invalid_linked_expectations_are_rejected[\nCustomer Name equals Example {run-id}\nEmail equals example@example.com] _
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_ ERROR at setup of test_invalid_linked_expectations_are_rejected[Email equals x\nEmail equals y] _
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_ ERROR at setup of test_invalid_linked_expectations_are_rejected[Email equals ] _
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_ ERROR at setup of test_invalid_linked_expectations_are_rejected[Email equals {secret}] _
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_ ERROR at setup of test_invalid_linked_expectations_are_rejected[Email equals x\r] _
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+________ ERROR at setup of test_missing_or_duplicate_link_never_passes ________
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_ ERROR at setup of test_legacy_snapshot_survives_database_reload_with_original_hash _
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+______ ERROR at setup of test_migration_roundtrip_and_runtime_ddl_denial ______
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_____________ ERROR at setup of test_runtime_role_and_forced_rls ______________
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+________ ERROR at setup of test_no_context_and_tenant_reads_with_check ________
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+____________ ERROR at setup of test_runtime_plan_immutable[update] ____________
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+____________ ERROR at setup of test_runtime_plan_immutable[delete] ____________
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_______ ERROR at setup of test_pooled_transaction_tenant_does_not_leak ________
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_______ ERROR at setup of test_plan_survives_new_repository_and_process _______
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+____________ ERROR at setup of test_expired_approval_blocks_start _____________
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_____________ ERROR at setup of test_admin_corruption_is_refused ______________
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+_ ERROR at setup of test_expired_lease_is_error_and_late_finish_cannot_overwrite _
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+______ ERROR at setup of test_concurrent_idempotency_single_durable_run _______
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+___________ ERROR at setup of test_api_cross_tenant_objects_denied ____________
+backend\tests\conftest.py:22: in database
+    with local_postgres() as admin_url:
+         ^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+scripts\local_postgres.py:64: in local_postgres
+    attempted_start = True
+scripts\local_postgres.py:31: in _run
+    code = getattr(error, 'returncode', None)
+E   RuntimeError: Isolated PostgreSQL command failed: pg_ctl.exe; unclassified startup failure; exit=None
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\ANIRUDH\Documents\autoqa-enterprise\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: C:\Users\ANIRUDH\Documents\autoqa-enterprise\work\linked-tests.xml -
+=========================== short test summary info ===========================
+ERROR config\test_api.py::test_password_hash - RuntimeError: Isolated Postgre...
+ERROR config\test_api.py::test_no_default_accounts - RuntimeError: Isolated P...
+ERROR config\test_api.py::test_auth_cookie_and_expiry - RuntimeError: Isolate...
+ERROR config\test_api.py::test_cookie_flags_and_logout - RuntimeError: Isolat...
+ERROR config\test_api.py::test_host_origin_and_csrf - RuntimeError: Isolated ...
+ERROR config\test_api.py::test_roles_and_safe_errors - RuntimeError: Isolated...
+ERROR config\test_api.py::test_runner_idempotency_required - RuntimeError: Is...
+ERROR config\test_api.py::test_login_rate_limit - RuntimeError: Isolated Post...
+ERROR config\test_browser.py::test_real_create_and_fresh_session_verification[Email equals example@example.com-PASS]
+ERROR config\test_browser.py::test_real_create_and_fresh_session_verification[Email equals deliberately-wrong@example.com-FAIL]
+ERROR config\test_browser.py::test_proxy_denies_control_plane_and_external_host
+ERROR config\test_browser.py::test_policy_refuses_missing_token - RuntimeErro...
+ERROR config\test_core.py::test_literal_and_immutable_snapshot - RuntimeError...
+ERROR config\test_core.py::test_unsupported_or_unverifiable_blocks[change0]
+ERROR config\test_core.py::test_unsupported_or_unverifiable_blocks[change1]
+ERROR config\test_core.py::test_unsupported_or_unverifiable_blocks[change2]
+ERROR config\test_core.py::test_unsupported_or_unverifiable_blocks[change3]
+ERROR config\test_core.py::test_verdict_never_passes_missing_or_blocked - Run...
+ERROR config\test_core.py::test_approval_tamper_separation_replay_and_expiry
+ERROR config\test_core.py::test_url_deny_by_default[https://127.0.0.1:8765/]
+ERROR config\test_core.py::test_url_deny_by_default[http://localhost:8765/]
+ERROR config\test_core.py::test_url_deny_by_default[http://127.0.0.1:8000/]
+ERROR config\test_core.py::test_url_deny_by_default[http://127.0.0.1:8765@evil.test/]
+ERROR config\test_core.py::test_url_deny_by_default[file:///etc/passwd] - Run...
+ERROR config\test_core.py::test_url_deny_by_default[http://127.0.0.1:8765/production]
+ERROR config\test_core.py::test_expired_final_post_check_is_denied - RuntimeE...
+ERROR config\test_core.py::test_restoring_approval_does_not_renew_or_impersonate_human_approval
+ERROR config\test_core.py::test_worker_timeout_kills_descendants - RuntimeErr...
+ERROR config\test_dashboard.py::test_dashboard_describe_approve_run_and_mutated_expectation
+ERROR config\test_dev_database.py::test_persistent_plan_survives_server_restart_and_credentials_are_protected
+ERROR config\test_dev_database.py::test_unrelated_directory_is_not_adopted - ...
+ERROR config\test_dev_database.py::test_directory_outside_owned_work_is_rejected
+ERROR config\test_linked_assertions.py::test_linked_expectations_are_literal_immutable_and_hash_bound
+ERROR config\test_linked_assertions.py::test_invalid_linked_expectations_are_rejected[Customer Name equals Example {run-id}\nEmail equals example@example.com\nEmail equals x]
+ERROR config\test_linked_assertions.py::test_invalid_linked_expectations_are_rejected[Customer Name equals Example {run-id}\nEmail equals example@example.com\n]
+ERROR config\test_linked_assertions.py::test_invalid_linked_expectations_are_rejected[\nCustomer Name equals Example {run-id}\nEmail equals example@example.com]
+ERROR config\test_linked_assertions.py::test_invalid_linked_expectations_are_rejected[Email equals x\nEmail equals y]
+ERROR config\test_linked_assertions.py::test_invalid_linked_expectations_are_rejected[Email equals ]
+ERROR config\test_linked_assertions.py::test_invalid_linked_expectations_are_rejected[Email equals {secret}]
+ERROR config\test_linked_assertions.py::test_invalid_linked_expectations_are_rejected[Email equals x\r]
+ERROR config\test_linked_assertions.py::test_missing_or_duplicate_link_never_passes
+ERROR config\test_linked_assertions.py::test_legacy_snapshot_survives_database_reload_with_original_hash
+ERROR config\test_migrations.py::test_migration_roundtrip_and_runtime_ddl_denial
+ERROR config\test_persistence.py::test_runtime_role_and_forced_rls - RuntimeE...
+ERROR config\test_persistence.py::test_no_context_and_tenant_reads_with_check
+ERROR config\test_persistence.py::test_runtime_plan_immutable[update] - Runti...
+ERROR config\test_persistence.py::test_runtime_plan_immutable[delete] - Runti...
+ERROR config\test_persistence.py::test_pooled_transaction_tenant_does_not_leak
+ERROR config\test_persistence.py::test_plan_survives_new_repository_and_process
+ERROR config\test_persistence.py::test_expired_approval_blocks_start - Runtim...
+ERROR config\test_persistence.py::test_admin_corruption_is_refused - RuntimeE...
+ERROR config\test_persistence.py::test_expired_lease_is_error_and_late_finish_cannot_overwrite
+ERROR config\test_persistence.py::test_concurrent_idempotency_single_durable_run
+ERROR config\test_persistence.py::test_api_cross_tenant_objects_denied - Runt...
+================== 1 warning, 54 errors in 123.00s (0:02:02) ==================

@@ -1,0 +1,84 @@
+{
+  "test": "real Selenium dashboard journey",
+  "cases": [
+    {
+      "expected_verdict": "PASS",
+      "observed_verdict": "PASS",
+      "plan_id": "5fec72a4bddc46fe83e9bc6c3c234e18",
+      "run": {
+        "id": "c459ae7083d74ff8adc1bcbe4b813a11",
+        "steps": [
+          {
+            "status": "EXECUTED",
+            "instruction": "Open the demo CRM"
+          },
+          {
+            "status": "EXECUTED",
+            "instruction": "Enter ABC Technologies {run-id} in Customer Name"
+          },
+          {
+            "status": "EXECUTED",
+            "instruction": "Enter abc+{run-id}@example.com in Email"
+          },
+          {
+            "status": "EXECUTED",
+            "instruction": "Click Save"
+          }
+        ],
+        "status": "PASS",
+        "cleanup": "ephemeral-demo-records-discarded-at-service-stop",
+        "plan_hash": "d5fbf90bcec282ba14f6e81de0a5f78cb951ce489d2007562c3c370c2428a892",
+        "record_id": "26fbc445d7204132b267d4aeac2123d7",
+        "assertions": [
+          {
+            "actual": "ABC Technologies c459ae7083d74ff8adc1bcbe4b813a11",
+            "source": "fresh-browser-record-by-id",
+            "status": "PASS",
+            "expected": "ABC Technologies c459ae7083d74ff8adc1bcbe4b813a11",
+            "record_id": "26fbc445d7204132b267d4aeac2123d7",
+            "comparator": "literal_equals",
+            "verification_level": "V2"
+          }
+        ],
+        "error_code": null,
+        "evidence_mode": "synthetic-text-only",
+        "browser_version": "153.0.8010.53"
+      }
+    },
+    {
+      "expected_verdict": "FAIL",
+      "observed_verdict": "ERROR",
+      "plan_id": "c033630738e34ebe8590e945d6957da4",
+      "run": {
+        "id": "bcd185b21df341b9aa3deba8bba04b34",
+        "steps": [
+          {
+            "status": "ERROR",
+            "instruction": "Open the demo CRM"
+          },
+          {
+            "status": "NOT_RUN",
+            "instruction": "Enter ABC Technologies {run-id} in Customer Name"
+          },
+          {
+            "status": "NOT_RUN",
+            "instruction": "Enter abc+{run-id}@example.com in Email"
+          },
+          {
+            "status": "NOT_RUN",
+            "instruction": "Click Save"
+          }
+        ],
+        "status": "ERROR",
+        "cleanup": "ephemeral-demo-records-discarded-at-service-stop",
+        "plan_hash": "a15d2d3e5865ddf81b8e2248518d39583888a5c2e3ae28b3318e38d3bdcafb59",
+        "record_id": null,
+        "assertions": [],
+        "error_code": "NoSuchDriverException",
+        "evidence_mode": "synthetic-text-only",
+        "browser_version": null
+      }
+    }
+  ],
+  "browser_version": "153.0.8010.53"
+}
