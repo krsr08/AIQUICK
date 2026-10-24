@@ -87,6 +87,9 @@ class Repository:
 
     def finish(self, tenant, run_id, report):
         with self.transaction(tenant) as conn:
+            row = conn.execute(select(runs).where(runs.c.id == run_id).with_for_update()).mappings().first()
+            if row is not None and (row['result'] or {}).get('cancel_requested'):
+                return False
             changed = conn.execute(update(runs).where(runs.c.id == run_id,
                 runs.c.status.in_(('QUEUED', 'RUNNING')),
                 runs.c.lease_expires_at > datetime.now(timezone.utc)).values(
@@ -94,3 +97,45 @@ class Repository:
             if not changed:
                 self.expire_runs(conn)
             return bool(changed)
+
+    def request_cancel(self, tenant, run_id, actor):
+        with self.transaction(tenant) as conn:
+            row = conn.execute(select(runs).where(runs.c.id == run_id).with_for_update()).mappings().first()
+            if row is None:
+                raise KeyError(run_id)
+            report = dict(row['result'])
+            if row['status'] in ('QUEUED', 'RUNNING') and not report.get('cancel_requested'):
+                report.update(cancel_requested=True, cancelled_by=actor,
+                              reason='Stopping execution; saved data is not rolled back')
+                conn.execute(update(runs).where(runs.c.id == run_id).values(
+                    result=report, updated_at=datetime.now(timezone.utc)))
+            return report
+
+    def cancellation_requested(self, tenant, run_id):
+        with self.transaction(tenant) as conn:
+            row = conn.execute(select(runs.c.result).where(runs.c.id == run_id)).first()
+            if row is None:
+                raise KeyError(run_id)
+            return bool((row.result or {}).get('cancel_requested'))
+
+    def worker_should_stop(self, tenant, run_id):
+        with self.transaction(tenant) as conn:
+            row = conn.execute(select(runs).where(runs.c.id == run_id)).mappings().first()
+            return (row is None or row['status'] not in ('QUEUED', 'RUNNING') or
+                    row['lease_expires_at'] <= datetime.now(timezone.utc) or
+                    bool((row['result'] or {}).get('cancel_requested')))
+
+    def acknowledge_cancel(self, tenant, run_id):
+        """Controller calls only after no worker was launched or process cleanup returned."""
+        with self.transaction(tenant) as conn:
+            self.expire_runs(conn)
+            row = conn.execute(select(runs).where(runs.c.id == run_id).with_for_update()).mappings().first()
+            if row is None:
+                raise KeyError(run_id)
+            if row['status'] not in ('QUEUED', 'RUNNING') or not row['result'].get('cancel_requested'):
+                return False
+            report = dict(row['result'], status='CANCELLED',
+                          reason='Execution stopped; saved data is not rolled back')
+            conn.execute(update(runs).where(runs.c.id == run_id).values(
+                status='CANCELLED', result=report, updated_at=datetime.now(timezone.utc)))
+            return True

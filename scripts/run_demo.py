@@ -7,6 +7,8 @@ import secrets
 import subprocess
 import sys
 import time
+import threading
+import webbrowser
 from contextlib import nullcontext
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -14,6 +16,19 @@ sys.path.insert(0, str(ROOT / 'backend' / 'src'))
 sys.path.insert(0, str(ROOT))
 from autoqa.api.auth import hash_password
 from scripts.dev_database import dev_database
+
+def open_when_ready():
+    """Open only the fixed local UI after the backend is serving its login page."""
+    import httpx
+    for _ in range(60):
+        try:
+            with httpx.Client(trust_env=False, timeout=1) as client:
+                if client.get('http://127.0.0.1:8000/').status_code == 200:
+                    webbrowser.open('http://127.0.0.1:8000/')
+                    return
+        except httpx.HTTPError:
+            pass
+        time.sleep(1)
 
 def launch_services(environment):
     processes = []
@@ -59,6 +74,8 @@ def main():
         processes = launch_services(environment)
         try:
             print('Synthetic demo ready at http://127.0.0.1:8000. Plans and run history persist in PostgreSQL.')
+            if '--open-browser' in sys.argv:
+                threading.Thread(target=open_when_ready, daemon=True).start()
             subprocess.run([sys.executable, '-m', 'autoqa.main'], cwd=ROOT, env=environment, check=True)
         finally:
             stop_services(processes)

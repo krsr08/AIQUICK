@@ -187,6 +187,11 @@ def create_app(service):
         actor(request)
         return scoped_service(request).runs[run_id]
 
+    @app.post('/api/v1/runs/{run_id}/cancel')
+    def cancel(run_id: str, body: Body, request: Request):
+        username = actor(request, 'Runner')
+        return scoped_service(request).cancel(run_id, username)
+
     dist = Path(__file__).resolve().parents[4] / 'frontend' / 'dist'
 
     @app.get('/{path:path}')

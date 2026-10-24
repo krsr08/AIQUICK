@@ -115,6 +115,16 @@ def test_dashboard_describe_approve_run_and_mutated_expectation(services, monkey
                     driver.save_screenshot(str(output / ('dashboard-' + expected_status.lower() + '.png')))
                     if expected_status == 'PASS':
                         button('Sign out').click()
+                # The approved negative plan can be launched again, then explicitly stopped.
+                button('Run approved test').click()
+                button('Cancel run').click()
+                WebDriverWait(driver, 110).until(lambda d: any(
+                    e.text == 'CANCELLED' for e in d.find_elements(By.CSS_SELECTOR, '[data-testid="run-status"]')))
+                cancelled = [r for r in services.runs.values() if r['status'] == 'CANCELLED']
+                assert cancelled and cancelled[-1]['cancel_requested']
+                evidence['cancellation'] = {'status': 'CANCELLED', 'cancel_requested': True}
+                (output / 'dashboard-result.json').write_text(json.dumps(evidence, indent=2), encoding='utf-8')
+                driver.save_screenshot(str(output / 'dashboard-cancelled.png'))
             finally:
                 driver.quit()
     finally:

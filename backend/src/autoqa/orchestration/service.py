@@ -3,13 +3,14 @@ import os
 import subprocess
 import sys
 import threading
+import tempfile
 import uuid
 import httpx
 from selenium.common.exceptions import WebDriverException
 from sqlalchemy import select, func
 from sqlalchemy.exc import SQLAlchemyError
 from autoqa.natural_language.compiler import compile_test
-from autoqa.orchestration.processes import bounded_worker
+from autoqa.orchestration.processes import bounded_worker, WorkerCancelled
 from autoqa.selenium_engine.configuration import browser_tools
 from autoqa.persistence.repository import Repository, tenant_name
 from autoqa.persistence.schema import plans, runs
@@ -100,20 +101,35 @@ class Service:
         initial = {'id': run_id, 'plan_hash': payload['hash'], 'status': 'RUNNING', 'steps': [], 'assertions': []}
         try:
             if not self.repository.finish(self.tenant_id, run_id, initial):
+                self.repository.acknowledge_cancel(self.tenant_id, run_id)
                 return
             allowed = ('PATH', 'SYSTEMROOT', 'SYSTEMDRIVE', 'WINDIR', 'TEMP', 'TMP', 'USERPROFILE',
                        'LOCALAPPDATA', 'APPDATA', 'PYTHONPATH', 'PROGRAMFILES', 'PROGRAMFILES(X86)', 'PROGRAMW6432')
             environment = {k: v for k, v in os.environ.items() if k.upper() in allowed}
             environment.update(browser_tools())
-            result = bounded_worker([sys.executable, '-m', 'autoqa.selenium_engine.worker'],
-                payload=json.dumps(payload), environment=environment, timeout=100)
+            with tempfile.TemporaryDirectory(prefix='autoqa-run-profiles-') as profile_root:
+                environment['AUTOQA_PROFILE_ROOT'] = profile_root
+                result = bounded_worker([sys.executable, '-m', 'autoqa.selenium_engine.worker'],
+                    payload=json.dumps(payload), environment=environment, timeout=100,
+                    cancelled=lambda: self.repository.worker_should_stop(self.tenant_id, run_id))
             report = json.loads(result)
             if report.get('id') != run_id or report.get('plan_hash') != payload['hash']:
                 raise ValueError('Invalid report')
-            self.repository.finish(self.tenant_id, run_id, report)
+            if not self.repository.finish(self.tenant_id, run_id, report):
+                self.repository.acknowledge_cancel(self.tenant_id, run_id)
+        except WorkerCancelled:
+            try:
+                self.repository.acknowledge_cancel(self.tenant_id, run_id)
+            except SQLAlchemyError:
+                pass  # The durable request remains; lease expiry cannot produce PASS.
         except (subprocess.SubprocessError, ValueError, OSError, RuntimeError, WebDriverException, SQLAlchemyError):
             try:
                 self.repository.finish(self.tenant_id, run_id, dict(initial, status='ERROR',
                     reason='Worker or storage failed; execution was not retried'))
+                # A cleanup failure must not acknowledge cancellation. The lease
+                # expires to ERROR if shutdown could not be established.
             except SQLAlchemyError:
                 pass  # Expired lease becomes ERROR when the database returns.
+
+    def cancel(self, run_id, actor):
+        return self.repository.request_cancel(self.tenant_id, run_id, actor)

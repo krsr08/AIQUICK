@@ -43,3 +43,5 @@ Plans, approvals and runs persist in PostgreSQL behind a restricted runtime acco
 Protected changes require independent human review before merge. CODEOWNERS is proposed; repository branch protection and signed-commit enforcement must be configured and verified by an administrator. See [readiness](docs/SPRINT0_READINESS.md), [threat model](docs/THREAT_MODEL.md), [dependency inventory](docs/dependencies.md), and [backlog](docs/BACKLOG.md).
 
 Current full-scope gaps: [completion ledger](docs/REQUIREMENTS_STATUS.md). Selected deployment defaults: [self-hosted Keycloak/OpenBao reference](docs/REFERENCE_DEPLOYMENT.md). Latest linked-assertion evidence: [verification](docs/LINKED_ASSERTIONS_VERIFICATION.md).
+
+Active runs can be stopped with **Cancel run** by a Runner/Admin in the same tenant. The UI shows Stopping until controller shutdown acknowledgement; cancellation does not undo records already saved. See [cancellation verification](docs/CANCELLATION_VERIFICATION.md).

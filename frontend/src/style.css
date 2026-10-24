@@ -4,3 +4,5 @@
 .observations{list-style:none;padding:0}.observations li{background:#f5f7f1;border-radius:8px;padding:12px;margin:8px 0;font-size:12px;overflow-wrap:anywhere}.observations dl{margin:0;display:grid;grid-template-columns:110px 1fr;gap:5px 12px}.observations dt{text-transform:capitalize;font-weight:650}.observations dd{margin:0}
 
 textarea{resize:vertical;min-height:110px}.expectation ol{padding-left:22px;font-size:14px;color:#254b34;overflow-wrap:anywhere}.expectation li{padding:5px 0}
+
+.cancel-run{display:flex;align-items:center;gap:16px;flex-wrap:wrap}.cancel-run .hint{margin:0}.status.cancelled{background:#e7eaf0;color:#46536b}

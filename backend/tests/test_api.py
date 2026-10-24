@@ -27,6 +27,11 @@ class Service:
     def start(self, plan_id, actor, idempotency_key):
         return {'id': 'run1', 'actor': actor}
 
+    def cancel(self, run_id, actor):
+        if run_id not in self.runs:
+            raise KeyError(run_id)
+        return {'id': run_id, 'actor': actor, 'status': 'RUNNING', 'cancel_requested': True}
+
 
 @pytest.fixture
 def client(monkeypatch):
@@ -113,3 +118,35 @@ def test_login_rate_limit(client):
     for _ in range(5):
         assert client.post('/api/v1/login', json={'username': 'missing', 'password': 'incorrect'}, headers={'Origin': 'http://testserver'}).status_code == 401
     assert client.post('/api/v1/login', json={'username': 'missing', 'password': 'incorrect'}, headers={'Origin': 'http://testserver'}).status_code == 429
+
+
+@pytest.mark.parametrize('role', ['author', 'approver', 'auditor'])
+def test_cancel_requires_runner_role(client, role):
+    headers = login(client, role)
+    assert client.post('/api/v1/runs/run1/cancel', json={}, headers=headers).status_code == 403
+
+
+@pytest.mark.parametrize('role', ['runner', 'admin'])
+def test_cancel_requires_csrf_and_empty_body(client, role):
+    assert client.post('/api/v1/runs/run1/cancel', json={}, headers={'Origin': 'http://testserver'}).status_code == 401
+    headers = login(client, role)
+    assert client.post('/api/v1/runs/run1/cancel', json={}, headers={'Origin': 'http://testserver'}).status_code == 403
+    assert client.post('/api/v1/runs/run1/cancel', json={'tenant_id': 'other'}, headers=headers).status_code == 422
+    response = client.post('/api/v1/runs/run1/cancel', json={}, headers=headers)
+    assert response.status_code == 200
+    assert response.json() == {'id': 'run1', 'actor': role, 'status': 'RUNNING', 'cancel_requested': True}
+    assert client.post('/api/v1/runs/missing/cancel', json={}, headers=headers).status_code == 404
+
+
+def test_cancel_uses_authenticated_tenant(client, monkeypatch):
+    headers = login(client, 'runner')
+    scoped_tenants = []
+    service = client.app.state.service
+
+    def scoped(tenant_id):
+        scoped_tenants.append(tenant_id)
+        return service
+
+    monkeypatch.setattr(service, 'for_tenant', scoped)
+    assert client.post('/api/v1/runs/run1/cancel', json={}, headers=headers).status_code == 200
+    assert scoped_tenants == ['synthetic-demo']

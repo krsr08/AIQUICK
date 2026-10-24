@@ -35,7 +35,7 @@ class PDPClient:
 
 @contextmanager
 def browser():
-    with tempfile.TemporaryDirectory(prefix='autoqa-profile-') as profile:
+    with tempfile.TemporaryDirectory(prefix='autoqa-profile-', dir=os.environ.get('AUTOQA_PROFILE_ROOT')) as profile:
         options = webdriver.ChromeOptions()
         options.binary_location = os.environ['AUTOQA_CHROME_BINARY']
         for arg in ('--headless=new', '--disable-extensions', '--disable-background-networking',

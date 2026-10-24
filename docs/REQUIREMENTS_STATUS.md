@@ -29,7 +29,7 @@ The authoritative scope spans Sprint 0 through Sprint 18. The product is **not c
 | Sprint 0 | Inventory, threat model, ADRs, repository and CI proposal exist | Human security/QA signatures, operational ownership and long-lead sandbox access |
 | Sprint 1 | Describe/review/approve/run/result UI, PostgreSQL/RLS, controlled English, Chrome create workflow | Demo CRM login/list, full acceptance and security review |
 | Sprint 2 | Durable plans, approvals and run state | Suites/history UX, evidence masking, durable audit, full role and egress controls |
-| Sprint 3 | Fresh-session record-by-ID verification; linked assertions under verification | Edge, safe cancellation, cleanup journal, full TC_CRM_001 and fault/escape matrix |
+| Sprint 3 | Fresh-session record-by-ID verification; linked assertions under verification | Edge, cleanup journal, full TC_CRM_001 and fault/escape matrix; local cancellation now implemented (CANCELLATION_VERIFICATION.md) |
 | Sprints 4–6 | Not implemented | Licensed pinned local model, page discovery/mappings, poisoning/injection defence, healing and evaluation |
 | Sprints 7–8 | Not implemented | Certified advanced web controls and browser capability matrix |
 | Sprints 9–11 | Not implemented | Authorized Salesforce QA adapter and real certification evidence |
