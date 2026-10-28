@@ -65,46 +65,70 @@ def test_cancel_after_terminal_result_is_noop(database):
     finally: repo.engine.dispose()
 
 @pytest.mark.browser
-def test_cancel_stops_real_chrome_and_driver(tmp_path):
+@pytest.mark.parametrize('browser_name', ['chrome', 'edge'])
+def test_cancel_stops_real_browser_and_driver(tmp_path, monkeypatch, browser_name):
     import ctypes
     from autoqa.selenium_engine.configuration import browser_tools
-    ready=tmp_path/'chrome-ready.json'
+    monkeypatch.setenv('AUTOQA_BROWSER', browser_name)
+    ready=tmp_path/f'{browser_name}-ready.json'
     profile_root=tmp_path/'profiles';profile_root.mkdir()
     environment={k:v for k,v in os.environ.items() if not k.startswith('AUTOQA_')}
     environment.update(browser_tools());environment['AUTOQA_PROFILE_ROOT']=str(profile_root)
     script='''import sys,json,time
 from pathlib import Path
 from autoqa.selenium_engine.worker import browser
-ready=Path(json.loads(sys.stdin.read())['ready'])
+payload=json.loads(sys.stdin.read())
+ready=Path(payload['ready'])
 with browser() as driver:
+    assert driver.capabilities['browserName']=={'chrome':'chrome','edge':'MicrosoftEdge'}[payload['browser_name']]
     driver.get('data:text/html,<title>Cancellation fixture</title>')
     assert driver.title=='Cancellation fixture'
-    ready.write_text(json.dumps({'driver':driver.service.process.pid,'browser':driver.capabilities['goog:processID']}))
+    capability = 'goog:processID'  # Both installed Chromium drivers expose this key.
+    staging=ready.with_suffix('.tmp')
+    staging.write_text(json.dumps({'driver':driver.service.process.pid,'browser':driver.capabilities[capability]}))
+    staging.replace(ready)
     time.sleep(60)
 '''
-    with pytest.raises(WorkerCancelled):
-        bounded_worker([sys.executable,'-c',script],payload=json.dumps({'ready':str(ready)}),
-            environment=environment,timeout=40,cancelled=ready.exists)
-    pids=json.loads(ready.read_text())
+    handles=[]
+    pids={}
     if os.name=='nt':
         from ctypes import wintypes
         kernel=ctypes.WinDLL('kernel32',use_last_error=True)
         kernel.OpenProcess.argtypes=[wintypes.DWORD,wintypes.BOOL,wintypes.DWORD]
         kernel.OpenProcess.restype=wintypes.HANDLE
         kernel.WaitForSingleObject.argtypes=[wintypes.HANDLE,wintypes.DWORD]
+        kernel.WaitForSingleObject.restype=wintypes.DWORD
         kernel.CloseHandle.argtypes=[wintypes.HANDLE]
-        for pid in pids.values():
-            handle=kernel.OpenProcess(0x00100000,False,pid)
-            if handle:
-                try: assert kernel.WaitForSingleObject(handle,5000)==0
-                finally: kernel.CloseHandle(handle)
-    else:
-        for pid in pids.values():
-            with pytest.raises(ProcessLookupError): os.kill(pid,0)
+    def pin_processes_then_cancel():
+        if not ready.exists():
+            return False
+        pids.update(json.loads(ready.read_text()))
+        if os.name=='nt':
+            for pid in pids.values():
+                handle=kernel.OpenProcess(0x00100000,False,pid)
+                assert handle, f'Cannot pin live process {pid}: Windows error {ctypes.get_last_error()}'
+                handles.append(handle)
+                assert kernel.WaitForSingleObject(handle,0)==258, 'Process exited before cancellation'
+        return True
+    try:
+        with pytest.raises(WorkerCancelled):
+            bounded_worker([sys.executable,'-c',script],payload=json.dumps({'ready':str(ready),'browser_name':browser_name}),
+                environment=environment,timeout=40,cancelled=pin_processes_then_cancel)
+        assert set(pids)=={'driver','browser'}
+        if os.name=='nt':
+            assert len(handles)==2
+            for handle in handles:
+                assert kernel.WaitForSingleObject(handle,5000)==0, 'Cancelled process did not terminate'
+        else:
+            for pid in pids.values():
+                with pytest.raises(ProcessLookupError): os.kill(pid,0)
+    finally:
+        for handle in handles:
+            kernel.CloseHandle(handle)
     import shutil
     shutil.rmtree(profile_root)
     assert not profile_root.exists()
-    Path('work/cancellation-browser.json').write_text(json.dumps({'real_browser_started':True,
+    Path(f'work/cancellation-{browser_name}.json').write_text(json.dumps({'browser_name':browser_name,'real_browser_started':True,
         'driver_and_browser_stopped':True,'profiles_removed':True,'status':'CANCELLED'},indent=2))
 
 def test_queued_cancellation_acknowledged_without_launch(database,monkeypatch):

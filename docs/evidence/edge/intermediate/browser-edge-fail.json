@@ -1,0 +1,30 @@
+{
+  "id": "45291d76803f414baf543a1579f14785",
+  "steps": [
+    {
+      "status": "BLOCKED",
+      "instruction": "Open the demo CRM"
+    },
+    {
+      "status": "NOT_RUN",
+      "instruction": "Enter Example {run-id} in Customer Name"
+    },
+    {
+      "status": "NOT_RUN",
+      "instruction": "Enter example@example.com in Email"
+    },
+    {
+      "status": "NOT_RUN",
+      "instruction": "Click Save"
+    }
+  ],
+  "status": "BLOCKED",
+  "cleanup": "ephemeral-demo-records-discarded-at-service-stop",
+  "plan_hash": "b8ef9ce131785059628b632e9eb6ceddf97923e89515a281e897db2e7c6e144c",
+  "record_id": null,
+  "assertions": [],
+  "error_code": "PolicyOrTargetDenied",
+  "browser_name": "MicrosoftEdge",
+  "evidence_mode": "synthetic-text-only",
+  "browser_version": "154.0.4258.37"
+}

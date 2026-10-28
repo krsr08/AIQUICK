@@ -39,3 +39,7 @@ Linked immutable name/email assertions and a multiline review editor extend sect
 ### Safe cancellation continuation
 
 Tenant-scoped Runner/Admin cancellation, durable stop requests, worker process-tree termination, parent-owned profile cleanup, late-result fencing and UI stopping/terminal states are implemented. See CANCELLATION_VERIFICATION.md for actual evidence. Target-record rollback/cleanup journal, distributed worker control, and the broader production isolation gates remain open.
+
+### 28 October 2026 — Edge execution
+
+Trusted server selection now supports Chrome and Edge with the same policy path, fresh verification profiles and process containment. Both real browsers passed positive, deliberately wrong-expectation and cancellation checks. See EDGE_VERIFICATION.md for final regression evidence and limitations. Full TC_CRM_001 and target cleanup remain open.

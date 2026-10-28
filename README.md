@@ -4,7 +4,7 @@ A local, synthetic-data implementation of the **Describe → Review → independ
 
 ## Run on Windows
 
-Prerequisites: Python 3.12, Node 24, installed Chrome, installed PostgreSQL binaries, and available loopback ports 8000, 8765, 8766, 8767. Windows defaults to `C:\Program Files\PostgreSQL\18\bin`; set `AUTOQA_POSTGRES_BIN` for another installation. The launcher creates its own loopback database cluster without touching an installed service. Selenium Manager obtains a matching driver on first use; subsequent offline operation requires its cached binary. Never use your normal browser profile for execution.
+Prerequisites: Python 3.12, Node 24, installed Chrome and Edge for the full test suite, installed PostgreSQL binaries, and available loopback ports 8000, 8765, 8766, 8767. Windows defaults to `C:\Program Files\PostgreSQL\18\bin`; set `AUTOQA_POSTGRES_BIN` for another installation. The launcher creates its own loopback database cluster without touching an installed service. Selenium Manager obtains a matching driver on first use; subsequent offline operation requires its cached binary. Never use your normal browser profile for execution.
 
 ```powershell
 py -3.12 -m venv .venv
@@ -20,7 +20,9 @@ On Windows, the launcher provisions a private persistent cluster under ignored `
 
 Open [the local workspace](http://127.0.0.1:8000). Sign in as author, review the prefilled synthetic example, and create a plan. Sign out and sign in as reviewer, select the plan, confirm its exact expectation, approve and run. A different expected value should produce FAIL. Unsupported sentences are rejected with guidance. Every new draft creates a separate immutable plan; approval does not transfer.
 
-This first slice supports exactly: open the synthetic CRM, fill Customer Name and Email once each, Save, then verify **one or two** linked literal field expectations by record ID in a separate Chrome session (V2). Enter one exact expectation per line; both must pass. `{run-id}` is expanded for unique run data. It does not yet implement CRM login, search/count assertions, full TC_CRM_001, suites or arbitrary sites.
+This first slice supports exactly: open the synthetic CRM, fill Customer Name and Email once each, Save, then verify **one or two** linked literal field expectations by record ID in a separate browser session (V2). Enter one exact expectation per line; both must pass. `{run-id}` is expanded for unique run data. It does not yet implement CRM login, search/count assertions, full TC_CRM_001, suites or arbitrary sites.
+
+Chrome is the default execution browser. To use Edge, set `$env:AUTOQA_BROWSER='edge'` before starting the launcher; use `'chrome'` to switch back. This is trusted server configuration, not a user-supplied executable or plan instruction. Unsupported values fail closed. The same engine runs both the action and fresh-session verification, and completed reports show the actual browser name/version. Existing plan hashes and approval semantics are unchanged. The browser that opens the dashboard is independent of the execution browser.
 
 ## Verify
 
@@ -30,7 +32,7 @@ This first slice supports exactly: open the synthetic CRM, fill Customer Name an
 .venv\Scripts\python.exe -m bandit -r backend/src policy_service demo_apps deployment scripts -ll
 ```
 
-Run browser tests serially with the demo stopped; fixtures own the fixed ports. The test session creates and removes a separate real PostgreSQL cluster with random credentials; it never uses the persistent demo database or SQLite. Tests run actual Chrome. Raw execution evidence is written into ignored `work/`; see the [original preview results](docs/VERIFICATION.md) and [PostgreSQL verification](docs/POSTGRES_VERIFICATION.md).
+Run browser tests serially with the demo stopped; fixtures own the fixed ports. The test session creates and removes a separate real PostgreSQL cluster with random credentials; it never uses the persistent demo database or SQLite. Browser workflow and process-cancellation tests require actual Chrome and Edge and do not silently skip missing browsers. Raw execution evidence is written into ignored `work/`; see the [original preview results](docs/VERIFICATION.md) and [PostgreSQL verification](docs/POSTGRES_VERIFICATION.md).
 
 ## Security boundary and limitations
 

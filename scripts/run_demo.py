@@ -4,12 +4,13 @@ import json
 import os
 from pathlib import Path
 import secrets
+import socket
 import subprocess
 import sys
 import time
 import threading
 import webbrowser
-from contextlib import nullcontext
+from contextlib import ExitStack, nullcontext
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'backend' / 'src'))
@@ -32,7 +33,19 @@ def open_when_ready():
 
 def launch_services(environment):
     processes = []
+    ports = (8765, 8767, 8766)
     try:
+        # Refuse an existing listener before spawning anything. On Windows an
+        # exclusive bind also rejects listeners that permit address sharing.
+        with ExitStack() as reservations:
+            for port in ports:
+                probe = reservations.enter_context(socket.socket())
+                if os.name == 'nt':
+                    probe.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
+                try:
+                    probe.bind(('127.0.0.1', port))
+                except OSError:
+                    raise RuntimeError('A demo port is occupied; ports 8765–8767 must be free') from None
         for module in ('demo_apps.crm', 'deployment.egress_proxy', 'policy_service.server'):
             child_environment = {k: v for k, v in environment.items() if not k.startswith('AUTOQA_')}
             if module == 'policy_service.server':
@@ -40,10 +53,25 @@ def launch_services(environment):
             process = subprocess.Popen([sys.executable, '-m', module], cwd=ROOT, env=child_environment,
                                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             processes.append(process)
-        time.sleep(1)
-        if any(p.poll() is not None for p in processes):
-            raise RuntimeError('A service could not start; ensure demo ports 8765–8767 are free')
-        return processes
+        deadline = time.monotonic() + 30
+        while time.monotonic() < deadline:
+            if any(p.poll() is not None for p in processes):
+                raise RuntimeError('A demo service exited before becoming ready')
+            ready = True
+            for port in ports:
+                try:
+                    with socket.create_connection(('127.0.0.1', port), timeout=.2):
+                        pass
+                except OSError:
+                    ready = False
+            if ready:
+                # Recheck child liveness after all listener checks so a failed
+                # child cannot be reported as ready just because a port opens.
+                if any(p.poll() is not None for p in processes):
+                    raise RuntimeError('A demo service exited during startup')
+                return processes
+            time.sleep(.1)
+        raise RuntimeError('Demo services did not become ready within 30 seconds')
     except Exception:
         stop_services(processes)
         raise

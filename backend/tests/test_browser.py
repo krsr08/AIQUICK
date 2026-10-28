@@ -1,4 +1,4 @@
-"""Real Chromium tests, never mocked or silently skipped."""
+"""Real Chrome and Edge tests, never mocked or silently skipped."""
 import json
 import os
 from pathlib import Path
@@ -28,9 +28,11 @@ def services():
         process.wait(timeout=10)
 
 @pytest.mark.browser
+@pytest.mark.parametrize('browser_name', ['chrome', 'edge'])
 @pytest.mark.parametrize('expected,status', [('Email equals example@example.com', 'PASS'),
                                            ('Email equals deliberately-wrong@example.com', 'FAIL')])
-def test_real_create_and_fresh_session_verification(services, expected, status):
+def test_real_create_and_fresh_session_verification(services, monkeypatch, browser_name, expected, status):
+    monkeypatch.setenv('AUTOQA_BROWSER', browser_name)
     plan = services.compile(dict(CASE, expected=expected), 'author')
     with pytest.raises(PermissionError):
         services.start(plan['id'], 'author', secrets.token_hex(8))
@@ -44,8 +46,10 @@ def test_real_create_and_fresh_session_verification(services, expected, status):
     result = services.runs[run['id']]
     output = Path('work')
     output.mkdir(exist_ok=True)
-    (output / f'browser-{status.lower()}.json').write_text(json.dumps(result, indent=2))
+    (output / f'browser-{browser_name}-{status.lower()}.json').write_text(json.dumps(result, indent=2))
     assert result['status'] == status, result
+    assert result['browser_name'] == {'chrome': 'chrome', 'edge': 'MicrosoftEdge'}[browser_name]
+    assert result['browser_version']
     assert result['assertions'][0]['verification_level'] == 'V2'
     assert all(s['status'] == 'EXECUTED' for s in result['steps'])
 
@@ -59,3 +63,13 @@ def test_proxy_denies_control_plane_and_external_host(services):
 
 def test_policy_refuses_missing_token(services):
     assert httpx.post('http://127.0.0.1:8766/action', json={'phase': 'execute'}, trust_env=False).status_code == 403
+
+
+def test_unsupported_browser_fails_before_resolution(monkeypatch):
+    from autoqa.selenium_engine.configuration import browser_tools
+    monkeypatch.setenv('AUTOQA_BROWSER', 'firefox')
+    def forbidden(*args, **kwargs):
+        raise AssertionError('Unsupported browser must not resolve or download tools')
+    monkeypatch.setattr('autoqa.selenium_engine.configuration.SeleniumManager.binary_paths', forbidden)
+    with pytest.raises(ValueError):
+        browser_tools()

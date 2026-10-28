@@ -4,11 +4,13 @@ import os
 import sys
 import tempfile
 from contextlib import contextmanager
+from pathlib import Path
 from urllib.parse import urlsplit
 
 import httpx
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.edge.service import Service as EdgeService
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -35,9 +37,25 @@ class PDPClient:
 
 @contextmanager
 def browser():
-    with tempfile.TemporaryDirectory(prefix='autoqa-profile-', dir=os.environ.get('AUTOQA_PROFILE_ROOT')) as profile:
+    selected = os.environ.get('AUTOQA_BROWSER', 'chrome')
+    if selected not in ('chrome', 'edge'):
+        raise ValueError('Unsupported browser configuration')
+    if selected == 'edge':
+        browser_binary = os.environ['AUTOQA_BROWSER_BINARY']
+        driver_binary = os.environ['AUTOQA_DRIVER_BINARY']
+        options = webdriver.EdgeOptions()
+        driver_class, service_class = webdriver.Edge, EdgeService
+    else:
+        # Legacy explicit Chrome paths remain valid for local test clients.
+        browser_binary = os.environ.get('AUTOQA_BROWSER_BINARY') or os.environ['AUTOQA_CHROME_BINARY']
+        driver_binary = os.environ.get('AUTOQA_DRIVER_BINARY') or os.environ['AUTOQA_CHROMEDRIVER_BINARY']
         options = webdriver.ChromeOptions()
-        options.binary_location = os.environ['AUTOQA_CHROME_BINARY']
+        driver_class, service_class = webdriver.Chrome, ChromeService
+    if not all(Path(path).is_absolute() and Path(path).is_file()
+               for path in (browser_binary, driver_binary)):
+        raise ValueError('Explicit browser and driver files are required')
+    with tempfile.TemporaryDirectory(prefix='autoqa-profile-', dir=os.environ.get('AUTOQA_PROFILE_ROOT')) as profile:
+        options.binary_location = browser_binary
         for arg in ('--headless=new', '--disable-extensions', '--disable-background-networking',
                     '--disable-sync', '--no-first-run', '--disable-quic',
                     '--proxy-server=http://127.0.0.1:8767', '--proxy-bypass-list=<-loopback>',
@@ -47,10 +65,16 @@ def browser():
         options.add_experimental_option('prefs', {'download_restrictions': 3,
             'profile.default_content_setting_values.notifications': 2,
             'credentials_enable_service': False, 'profile.password_manager_enabled': False})
-        driver = webdriver.Chrome(options=options, service=ChromeService(os.environ['AUTOQA_CHROMEDRIVER_BINARY']))
+        driver = driver_class(options=options, service=service_class(driver_binary))
         try:
             driver.set_page_load_timeout(15)
             driver.set_script_timeout(3)
+            # Normalize browser-owned startup pages without accessing any target.
+            # The fixed inert document is already permitted by the PDP; target
+            # navigation still requires its normal action authorization.
+            driver.get('data:,')
+            if driver.current_url != 'data:,' or len(driver.window_handles) != 1:
+                raise Denied('Browser startup did not reach a single blank page')
             yield driver
         finally:
             driver.quit()
@@ -70,11 +94,13 @@ def execute(payload):
     assertions = []
     record = None
     browser_version = None
+    browser_name = None
     error_code = None
     index = 0
     try:
         with browser() as driver:
             browser_version = driver.capabilities['browserVersion']
+            browser_name = driver.capabilities['browserName']
             for index, step in enumerate(plan.steps):
                 element = None
                 if step.kind == 'fill':
@@ -122,7 +148,8 @@ def execute(payload):
         error_code = type(exc).__name__
     return {'id': payload['id'], 'plan_hash': plan.digest(), 'status': verdict(results, assertions, tuple(a.id for a in plan.required_assertions())),
             'steps': results, 'assertions': assertions, 'record_id': record,
-            'browser_version': browser_version, 'error_code': error_code, 'evidence_mode': 'synthetic-text-only',
+            'browser_name': browser_name, 'browser_version': browser_version,
+            'error_code': error_code, 'evidence_mode': 'synthetic-text-only',
             'cleanup': 'ephemeral-demo-records-discarded-at-service-stop'}
 
 if __name__ == '__main__':
