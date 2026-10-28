@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="74" time="412.769" timestamp="2026-10-25T23:39:01.336411+05:30" hostname="DESKTOP-1PEHUEG"><testcase classname="test_api" name="test_password_hash" time="27.582" /><testcase classname="test_api" name="test_no_default_accounts" time="0.006" /><testcase classname="test_api" name="test_auth_cookie_and_expiry" time="2.895" /><testcase classname="test_api" name="test_cookie_flags_and_logout" time="1.891" /><testcase classname="test_api" name="test_host_origin_and_csrf" time="2.458" /><testcase classname="test_api" name="test_roles_and_safe_errors" time="2.653" /><testcase classname="test_api" name="test_runner_idempotency_required" time="2.005" /><testcase classname="test_api" name="test_login_rate_limit" time="4.870" /><testcase classname="test_api" name="test_cancel_requires_runner_role[author]" time="1.651" /><testcase classname="test_api" name="test_cancel_requires_runner_role[approver]" time="1.799" /><testcase classname="test_api" name="test_cancel_requires_runner_role[auditor]" time="1.541" /><testcase classname="test_api" name="test_cancel_requires_csrf_and_empty_body[runner]" time="3.874" /><testcase classname="test_api" name="test_cancel_requires_csrf_and_empty_body[admin]" time="2.939" /><testcase classname="test_api" name="test_cancel_uses_authenticated_tenant" time="3.802" /><testcase classname="test_browser" name="test_real_create_and_fresh_session_verification[Email equals example@example.com-PASS-chrome]" time="42.781" /><testcase classname="test_browser" name="test_real_create_and_fresh_session_verification[Email equals example@example.com-PASS-edge]" time="27.587"><failure message="AssertionError: {'id': '1472332277044371bdfcf9532b5e263f', 'steps': [{'status': 'BLOCKED', 'instruction': 'Open the demo CRM'}, {'status': 'NOT_RUN', 'instruction': 'Enter Example {run-id} in Customer Name'}, {'status': 'NOT_RUN', 'instruction': 'Enter example@example.com in Email'}, {'status': 'NOT_RUN', 'instruction': 'Click Save'}], 'status': 'BLOCKED', 'cleanup': 'ephemeral-demo-records-discarded-at-service-stop', ...}&#10;assert 'BLOCKED' == 'PASS'&#10;  &#10;  - PASS&#10;  + BLOCKED">backend\tests\test_browser.py:50: in test_real_create_and_fresh_session_verification
+    assert result['status'] == status, result
+E   AssertionError: {'id': '1472332277044371bdfcf9532b5e263f', 'steps': [{'status': 'BLOCKED', 'instruction': 'Open the demo CRM'}, {'status': 'NOT_RUN', 'instruction': 'Enter Example {run-id} in Customer Name'}, {'status': 'NOT_RUN', 'instruction': 'Enter example@example.com in Email'}, {'status': 'NOT_RUN', 'instruction': 'Click Save'}], 'status': 'BLOCKED', 'cleanup': 'ephemeral-demo-records-discarded-at-service-stop', ...}
+E   assert 'BLOCKED' == 'PASS'
+E     
+E     - PASS
+E     + BLOCKED</failure></testcase><testcase classname="test_browser" name="test_real_create_and_fresh_session_verification[Email equals deliberately-wrong@example.com-FAIL-chrome]" time="19.702" /><testcase classname="test_browser" name="test_real_create_and_fresh_session_verification[Email equals deliberately-wrong@example.com-FAIL-edge]" time="17.747"><failure message="AssertionError: {'id': '45291d76803f414baf543a1579f14785', 'steps': [{'status': 'BLOCKED', 'instruction': 'Open the demo CRM'}, {'status': 'NOT_RUN', 'instruction': 'Enter Example {run-id} in Customer Name'}, {'status': 'NOT_RUN', 'instruction': 'Enter example@example.com in Email'}, {'status': 'NOT_RUN', 'instruction': 'Click Save'}], 'status': 'BLOCKED', 'cleanup': 'ephemeral-demo-records-discarded-at-service-stop', ...}&#10;assert 'BLOCKED' == 'FAIL'&#10;  &#10;  - FAIL&#10;  + BLOCKED">backend\tests\test_browser.py:50: in test_real_create_and_fresh_session_verification
+    assert result['status'] == status, result
+E   AssertionError: {'id': '45291d76803f414baf543a1579f14785', 'steps': [{'status': 'BLOCKED', 'instruction': 'Open the demo CRM'}, {'status': 'NOT_RUN', 'instruction': 'Enter Example {run-id} in Customer Name'}, {'status': 'NOT_RUN', 'instruction': 'Enter example@example.com in Email'}, {'status': 'NOT_RUN', 'instruction': 'Click Save'}], 'status': 'BLOCKED', 'cleanup': 'ephemeral-demo-records-discarded-at-service-stop', ...}
+E   assert 'BLOCKED' == 'FAIL'
+E     
+E     - FAIL
+E     + BLOCKED</failure></testcase><testcase classname="test_browser" name="test_proxy_denies_control_plane_and_external_host" time="0.098" /><testcase classname="test_browser" name="test_policy_refuses_missing_token" time="0.041" /><testcase classname="test_browser" name="test_unsupported_browser_fails_before_resolution" time="0.020" /><testcase classname="test_cancellation" name="test_cancel_persists_and_fences_completion_until_acknowledged" time="0.335" /><testcase classname="test_cancellation" name="test_prelaunch_cancel_never_starts_process" time="0.021" /><testcase classname="test_cancellation" name="test_cancellation_kills_descendant_before_delayed_write" time="4.829" /><testcase classname="test_cancellation" name="test_cancel_after_terminal_result_is_noop" time="0.294" /><testcase classname="test_cancellation" name="test_cancel_stops_real_browser_and_driver[chrome]" time="11.695" /><testcase classname="test_cancellation" name="test_cancel_stops_real_browser_and_driver[edge]" time="12.803"><failure message="AssertionError: assert 258 == 0&#10; +  where 258 = &lt;_FuncPtr object at 0x000001E32C8D1D90&gt;(2676, 5000)&#10; +    where &lt;_FuncPtr object at 0x000001E32C8D1D90&gt; = &lt;WinDLL 'kernel32', handle 7fffefee0000 at 0x1e32c8eb770&gt;.WaitForSingleObject">backend\tests\test_cancellation.py:102: in test_cancel_stops_real_browser_and_driver
+    handle=kernel.OpenProcess(0x00100000,False,pid)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: assert 258 == 0
+E    +  where 258 = &lt;_FuncPtr object at 0x000001E32C8D1D90&gt;(2676, 5000)
+E    +    where &lt;_FuncPtr object at 0x000001E32C8D1D90&gt; = &lt;WinDLL 'kernel32', handle 7fffefee0000 at 0x1e32c8eb770&gt;.WaitForSingleObject</failure></testcase><testcase classname="test_cancellation" name="test_queued_cancellation_acknowledged_without_launch" time="0.244" /><testcase classname="test_cancellation" name="test_service_cancellation_is_durable_and_idempotent" time="3.705" /><testcase classname="test_cancellation" name="test_cleanup_failure_does_not_acknowledge_cancellation" time="0.239" /><testcase classname="test_cancellation" name="test_expired_lease_stops_before_worker_launch" time="0.310" /><testcase classname="test_core" name="test_literal_and_immutable_snapshot" time="0.008" /><testcase classname="test_core" name="test_unsupported_or_unverifiable_blocks[change0]" time="0.004" /><testcase classname="test_core" name="test_unsupported_or_unverifiable_blocks[change1]" time="0.006" /><testcase classname="test_core" name="test_unsupported_or_unverifiable_blocks[change2]" time="0.009" /><testcase classname="test_core" name="test_unsupported_or_unverifiable_blocks[change3]" time="0.003" /><testcase classname="test_core" name="test_verdict_never_passes_missing_or_blocked" time="0.005" /><testcase classname="test_core" name="test_approval_tamper_separation_replay_and_expiry" time="0.009" /><testcase classname="test_core" name="test_url_deny_by_default[https://127.0.0.1:8765/]" time="0.003" /><testcase classname="test_core" name="test_url_deny_by_default[http://localhost:8765/]" time="0.004" /><testcase classname="test_core" name="test_url_deny_by_default[http://127.0.0.1:8000/]" time="0.002" /><testcase classname="test_core" name="test_url_deny_by_default[http://127.0.0.1:8765@evil.test/]" time="0.002" /><testcase classname="test_core" name="test_url_deny_by_default[file:///etc/passwd]" time="0.004" /><testcase classname="test_core" name="test_url_deny_by_default[http://127.0.0.1:8765/production]" time="0.012" /><testcase classname="test_core" name="test_expired_final_post_check_is_denied" time="0.004" /><testcase classname="test_core" name="test_restoring_approval_does_not_renew_or_impersonate_human_approval" time="0.008" /><testcase classname="test_core" name="test_worker_timeout_kills_descendants" time="5.059" /><testcase classname="test_dashboard" name="test_dashboard_describe_approve_run_and_mutated_expectation" time="102.444" /><testcase classname="test_dev_database" name="test_persistent_plan_survives_server_restart_and_credentials_are_protected" time="26.117" /><testcase classname="test_dev_database" name="test_unrelated_directory_is_not_adopted" time="0.049" /><testcase classname="test_dev_database" name="test_directory_outside_owned_work_is_rejected" time="0.014" /><testcase classname="test_linked_assertions" name="test_linked_expectations_are_literal_immutable_and_hash_bound" time="0.006" /><testcase classname="test_linked_assertions" name="test_invalid_linked_expectations_are_rejected[Customer Name equals Example {run-id}\nEmail equals example@example.com\nEmail equals x]" time="0.003" /><testcase classname="test_linked_assertions" name="test_invalid_linked_expectations_are_rejected[Customer Name equals Example {run-id}\nEmail equals example@example.com\n]" time="0.007" /><testcase classname="test_linked_assertions" name="test_invalid_linked_expectations_are_rejected[\nCustomer Name equals Example {run-id}\nEmail equals example@example.com]" time="0.008" /><testcase classname="test_linked_assertions" name="test_invalid_linked_expectations_are_rejected[Email equals x\nEmail equals y]" time="0.009" /><testcase classname="test_linked_assertions" name="test_invalid_linked_expectations_are_rejected[Email equals ]" time="0.003" /><testcase classname="test_linked_assertions" name="test_invalid_linked_expectations_are_rejected[Email equals {secret}]" time="0.004" /><testcase classname="test_linked_assertions" name="test_invalid_linked_expectations_are_rejected[Email equals x\r]" time="0.009" /><testcase classname="test_linked_assertions" name="test_missing_or_duplicate_link_never_passes" time="0.002" /><testcase classname="test_linked_assertions" name="test_legacy_snapshot_survives_database_reload_with_original_hash" time="0.161" /><testcase classname="test_migrations" name="test_migration_roundtrip_and_runtime_ddl_denial" time="4.038" /><testcase classname="test_persistence" name="test_runtime_role_and_forced_rls" time="0.192" /><testcase classname="test_persistence" name="test_no_context_and_tenant_reads_with_check" time="0.231" /><testcase classname="test_persistence" name="test_runtime_plan_immutable[update]" time="0.191" /><testcase classname="test_persistence" name="test_runtime_plan_immutable[delete]" time="0.218" /><testcase classname="test_persistence" name="test_pooled_transaction_tenant_does_not_leak" time="0.568" /><testcase classname="test_persistence" name="test_plan_survives_new_repository_and_process" time="11.425" /><testcase classname="test_persistence" name="test_expired_approval_blocks_start" time="0.271" /><testcase classname="test_persistence" name="test_admin_corruption_is_refused" time="0.386" /><testcase classname="test_persistence" name="test_expired_lease_is_error_and_late_finish_cannot_overwrite" time="0.274" /><testcase classname="test_persistence" name="test_concurrent_idempotency_single_durable_run" time="4.749"><failure message="PermissionError: Policy unavailable">.venv\Lib\site-packages\httpx\_transports\default.py:101: in map_httpcore_exceptions
+    yield
+.venv\Lib\site-packages\httpx\_transports\default.py:250: in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpcore\_sync\connection_pool.py:256: in handle_request
+    raise exc from None
+.venv\Lib\site-packages\httpcore\_sync\connection_pool.py:236: in handle_request
+    response = connection.handle_request(
+.venv\Lib\site-packages\httpcore\_sync\connection.py:101: in handle_request
+    raise exc
+.venv\Lib\site-packages\httpcore\_sync\connection.py:78: in handle_request
+    stream = self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpcore\_sync\connection.py:124: in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpcore\_backends\sync.py:207: in connect_tcp
+    with map_exceptions(exc_map):
+         ^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:158: in __exit__
+    self.gen.throw(value)
+.venv\Lib\site-packages\httpcore\_exceptions.py:14: in map_exceptions
+    raise to_exc(exc) from exc
+E   httpcore.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+backend\src\autoqa\orchestration\service.py:34: in policy
+    response = httpx.post('http://127.0.0.1:8766' + path, json=data,
+.venv\Lib\site-packages\httpx\_api.py:304: in post
+    return request(
+.venv\Lib\site-packages\httpx\_api.py:109: in request
+    return client.request(
+.venv\Lib\site-packages\httpx\_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:914: in send
+    response = self._send_handling_auth(
+.venv\Lib\site-packages\httpx\_client.py:942: in _send_handling_auth
+    response = self._send_handling_redirects(
+.venv\Lib\site-packages\httpx\_client.py:979: in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:1014: in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_transports\default.py:249: in handle_request
+    with map_httpcore_exceptions():
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:158: in __exit__
+    self.gen.throw(value)
+.venv\Lib\site-packages\httpx\_transports\default.py:118: in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+E   httpx.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+backend\tests\test_persistence.py:163: in test_concurrent_idempotency_single_durable_run
+    service.approve(plan['id'], 'reviewer', plan['hash'], True)
+backend\src\autoqa\orchestration\service.py:64: in approve
+    self.policy('/approve', {'plan': plan.model_dump(), 'hash': plan_hash, 'approver': actor,
+backend\src\autoqa\orchestration\service.py:40: in policy
+    raise PermissionError('Policy unavailable') from exc
+E   PermissionError: Policy unavailable</failure></testcase><testcase classname="test_persistence" name="test_api_cross_tenant_objects_denied" time="2.671" /><testcase classname="test_record_identity" name="test_preexisting_same_name_cannot_satisfy_new_record_assertions" time="39.639" /></testsuite></testsuites>

@@ -1,0 +1,54 @@
+{
+  "id": "8609e283ba5b410f9ac6046ff421154b",
+  "steps": [
+    {
+      "status": "EXECUTED",
+      "instruction": "Open the demo CRM"
+    },
+    {
+      "status": "EXECUTED",
+      "instruction": "Enter Identity collision a8084d9575883e96 in Customer Name"
+    },
+    {
+      "status": "EXECUTED",
+      "instruction": "Enter new@example.com in Email"
+    },
+    {
+      "status": "EXECUTED",
+      "instruction": "Click Save"
+    }
+  ],
+  "status": "FAIL",
+  "cleanup": "ephemeral-demo-records-discarded-at-service-stop",
+  "plan_hash": "97e49e4e7dd06f2a21a4a76918c214370534b1525469c7a44cecb8e03b69d65a",
+  "record_id": "2ee4700db93d495a8e5f139925d27553",
+  "assertions": [
+    {
+      "field": "Customer Name",
+      "phase": "final",
+      "actual": "Identity collision a8084d9575883e96",
+      "source": "fresh-browser-record-by-id",
+      "status": "PASS",
+      "expected": "Identity collision a8084d9575883e96",
+      "record_id": "2ee4700db93d495a8e5f139925d27553",
+      "comparator": "literal_equals",
+      "assertion_id": "final-1",
+      "verification_level": "V2"
+    },
+    {
+      "field": "Email",
+      "phase": "final",
+      "actual": "new@example.com",
+      "source": "fresh-browser-record-by-id",
+      "status": "FAIL",
+      "expected": "old@example.com",
+      "record_id": "2ee4700db93d495a8e5f139925d27553",
+      "comparator": "literal_equals",
+      "assertion_id": "final-2",
+      "verification_level": "V2"
+    }
+  ],
+  "error_code": null,
+  "evidence_mode": "synthetic-text-only",
+  "browser_version": "153.0.8010.53"
+}

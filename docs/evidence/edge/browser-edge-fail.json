@@ -1,0 +1,43 @@
+{
+  "id": "6729b90f5b6847bb9b4232bcc5cba991",
+  "steps": [
+    {
+      "status": "EXECUTED",
+      "instruction": "Open the demo CRM"
+    },
+    {
+      "status": "EXECUTED",
+      "instruction": "Enter Example {run-id} in Customer Name"
+    },
+    {
+      "status": "EXECUTED",
+      "instruction": "Enter example@example.com in Email"
+    },
+    {
+      "status": "EXECUTED",
+      "instruction": "Click Save"
+    }
+  ],
+  "status": "FAIL",
+  "cleanup": "ephemeral-demo-records-discarded-at-service-stop",
+  "plan_hash": "10096335100d69fe813506147950cad6b4a9f77bc1438acb636b2504c3813e1b",
+  "record_id": "c0bcae2f7ae94450a1ecdfe67017a678",
+  "assertions": [
+    {
+      "field": "Email",
+      "phase": "final",
+      "actual": "example@example.com",
+      "source": "fresh-browser-record-by-id",
+      "status": "FAIL",
+      "expected": "deliberately-wrong@example.com",
+      "record_id": "c0bcae2f7ae94450a1ecdfe67017a678",
+      "comparator": "literal_equals",
+      "assertion_id": "final-1",
+      "verification_level": "V2"
+    }
+  ],
+  "error_code": null,
+  "browser_name": "MicrosoftEdge",
+  "evidence_mode": "synthetic-text-only",
+  "browser_version": "154.0.4258.37"
+}

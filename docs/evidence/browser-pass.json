@@ -1,0 +1,38 @@
+{
+  "id": "d76fde5d132b4f9d9716d6c4ba455030",
+  "plan_hash": "2a6d66d2dc70c89668ddde704b7a6b6e6d84ef33f7ff4fc5f20133baf58fb030",
+  "status": "PASS",
+  "steps": [
+    {
+      "instruction": "Open the demo CRM",
+      "status": "EXECUTED"
+    },
+    {
+      "instruction": "Enter Example {run-id} in Customer Name",
+      "status": "EXECUTED"
+    },
+    {
+      "instruction": "Enter example@example.com in Email",
+      "status": "EXECUTED"
+    },
+    {
+      "instruction": "Click Save",
+      "status": "EXECUTED"
+    }
+  ],
+  "assertions": [
+    {
+      "status": "PASS",
+      "expected": "example@example.com",
+      "actual": "example@example.com",
+      "comparator": "literal_equals",
+      "verification_level": "V2",
+      "source": "fresh-browser-record-by-id",
+      "record_id": "12d93d4a7e004e45b8d269c6cff31a0f"
+    }
+  ],
+  "record_id": "12d93d4a7e004e45b8d269c6cff31a0f",
+  "browser_version": "153.0.8010.53",
+  "evidence_mode": "synthetic-text-only",
+  "cleanup": "ephemeral-demo-records-discarded-at-service-stop"
+}
